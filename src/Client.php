@@ -52,6 +52,6 @@ class Client
     {
         return $service
             ->token($this->token)
-            ->httpClient($this->http);
+            ->setHttpClient($this->http);
     }
 }

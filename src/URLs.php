@@ -17,8 +17,14 @@ class URLs
     const OTP_URL = self::BASE_URL . "/sendotp.php";
 
     /**
-     * URl for Send OTP Request
+     * URl for Verify OTP
      * @var string
      */
     const OTP_VERIFY_URL = self::BASE_URL . "/verifyRequestOTP.php";
+
+    /**
+     * URl for Resend OTP Request
+     * @var string
+     */
+    const OTP_RESEND_URL = self::BASE_URL . "/retryotp.php";
 }

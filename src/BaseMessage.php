@@ -58,7 +58,7 @@ class BaseMessage implements JsonSerializable
         return $this->setPayloadFor(static::COUNTRY_KEY, $country_code);
     }
 
-    public function sender(string $sender): self
+    public function from(string $sender): self
     {
         return $this->setPayloadFor(static::SENDER_KEY, $sender);
     }
@@ -139,7 +139,7 @@ class BaseMessage implements JsonSerializable
         return $this->getPayloadFor(static::TOKEN_KEY);
     }
 
-    public function httpClient(HttpClient $httpClient = null): self
+    public function setHttpClient(HttpClient $httpClient = null): self
     {
         $this->http = $httpClient;
         return $this;
