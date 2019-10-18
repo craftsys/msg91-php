@@ -2,6 +2,12 @@
 
 This is a **PHP Client** for [MSG91 APIs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139).
 
+## Installation
+
+```bash
+composer require creaftsys/msg91-php
+```
+
 ## Usage
 
 ### Create a Client
