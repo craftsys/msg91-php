@@ -32,4 +32,12 @@ class Message extends BaseMessage
             $this->formatMobileNumber($mobile_no)
         );
     }
+
+    /**
+     * Set the message to be send
+     */
+    public function message(string $message): self
+    {
+        return $this->setPayloadFor(static::MESSAGE_KEY, $message);
+    }
 }

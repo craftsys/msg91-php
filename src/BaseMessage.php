@@ -63,10 +63,6 @@ class BaseMessage implements JsonSerializable
         return $this->setPayloadFor(static::SENDER_KEY, $sender);
     }
 
-    public function message(string $message): self
-    {
-        return $this->setPayloadFor(static::MESSAGE_KEY, $message);
-    }
 
     /**
      * Any addition options for the payload
