@@ -1,0 +1,33 @@
+{
+  "name": "craftsys/msg91-php",
+  "description": "PHP Client for using MSG91's API.",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Sudhir Mitharwal",
+      "email": "luckysud4@gmail.com",
+      "role": "Developer",
+      "homepage": "http://github.com/sudkumar"
+    }
+  ],
+  "support": {
+    "email": "luckysud4@gmail.com"
+  },
+  "require": {
+    "php": ">=7.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Craftsys\\MSG91\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Craftsys\\MSG91\\Test\\": "tests/"
+    }
+  }
+}
