@@ -2,6 +2,8 @@
 
 This is a **PHP Client** for [MSG91 APIs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139).
 
+**CAUTION**: This Project is still under development and apis are subjected to change before `v1.0.0` release.
+
 ## Installation
 
 ```bash
