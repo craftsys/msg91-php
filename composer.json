@@ -11,7 +11,14 @@
       "homepage": "http://github.com/sudkumar"
     }
   ],
+  "keywords": [
+    "msg91",
+    "php"
+  ],
+  "homepage": "https://github.com/craftsys/msg91-php",
   "support": {
+    "issues": "https://github.com/craftsys/msg91-php/issues",
+    "source": "https://github.com/craftsys/msg91-php",
     "email": "luckysud4@gmail.com"
   },
   "require": {
@@ -20,6 +27,16 @@
   "require-dev": {
     "phpunit/phpunit": "^7.4"
   },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "x.x.x-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "Craftsys\\MSG91\\": "src/"
@@ -29,5 +46,8 @@
     "psr-4": {
       "Craftsys\\MSG91\\Test\\": "tests/"
     }
+  },
+  "scripts": {
+    "test": "phpunit  --colors=always"
   }
 }
