@@ -8,7 +8,12 @@ This is a **PHP Client** for [MSG91 APIs](https://docs.msg91.com/collection/msg9
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Examples](#examples) - [Create a Client](#create-a-client) - [Managing OTPs](#managing-otps) - [Send OTP](#send-otp) - [Verify OTP](#verify-otp) - [Resend OTP](#resend-otp)
+- [Examples](#examples)
+  - [Create a Client](#create-a-client)
+  - [Managing OTPs](#managing-otps)
+    - [Send OTP](#send-otp)
+    - [Verify OTP](#verify-otp)
+    - [Resend OTP](#resend-otp)
 
 > **CAUTION**: The project is under active development and so, some apis are subjected to change before `v1.0.0` release.
 
