@@ -14,44 +14,40 @@ class Client
 
 
     /**
-     * Authentication token
-     * @var string|null
+     * Configuration
+     * @var Config
      */
-    protected $token;
+    protected $config;
 
 
-    public function __construct($token = null, HttpClient $httpClient = null)
+    public function __construct(array $config = null, HttpClient $httpClient = null)
     {
-        $this->token = $token;
+        $this->config = new Config($config);
         $this->http = $httpClient;
     }
 
     /**
-     * Get the authentication token
+     * Get the configuration
      */
-    public function getToken(): ?string
+    public function getConfig(): Config
     {
-        return $this->token;
+        return $this->config;
     }
 
     /**
-     * Set the authentication token
+     * Set the new configuration
      */
-    public function setToken(?string $token = null): self
+    public function setConfig(array $config = null): self
     {
-        $this->token = $token;
+        $this->config = new Config($config);
         return $this;
     }
 
+    /**
+     * The OTP service which provide functionality for sending, verifying and resending OTPs
+     */
     public function otp($otp = null): OTPMessage
     {
-        return $this->service(new OTPMessage($otp));
-    }
-
-    protected function service($service)
-    {
-        return $service
-            ->token($this->token)
-            ->setHttpClient($this->http);
+        return new OTPMessage($this->config, $otp, $this->http);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Craftsys\MSG91;
 
+use GuzzleHttp\Client as HttpClient;
+
 class OTPMessage extends BaseMessage
 {
 
@@ -14,16 +16,23 @@ class OTPMessage extends BaseMessage
     const OTP_EXPIRY_KEY = "otp_expiry";
     const VIA_KEY = "retrytype";
 
-    public function __construct(?int $otp = null)
+    public function __construct(Config $config, $otp = null, HttpClient $httpClient = null)
     {
-        $this->options([
-            self::COUNTRY_KEY => 91,
-            self::MESSAGE_KEY => "Your OTP is ##OTP##",
-            self::VIA_KEY => "text",
-        ]);
+        parent::__construct($config, $httpClient);
         if ($otp) {
             $this->otp($otp);
         }
+        $this->createPayload();
+    }
+
+    protected function createPayload()
+    {
+        $config = $this->config->getMany(["country", "message", "retry_via", "otp_length", "otp_expiry"]);
+        if ($config["country"]) $this->country($config['country']);
+        if ($config["message"]) $this->message($config['message']);
+        if ($config["retry_via"]) $this->via($config['retry_via']);
+        if ($config["otp_length"]) $this->digits($config['otp_length']);
+        if ($config["otp_expiry"]) $this->expiresInMinutes($config['otp_expiry']);
     }
 
     /**
@@ -109,6 +118,6 @@ class OTPMessage extends BaseMessage
 
     public function resend(): ?Response
     {
-        return $this->sendRequest(URLs::OTP_VERIFY_URL);
+        return $this->sendRequest(URLs::OTP_RESEND_URL);
     }
 }

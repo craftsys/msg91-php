@@ -4,7 +4,7 @@ namespace Craftsys\MSG91;
 
 use Craftsys\MSG91\Exceptions\ConnectionError;
 use Craftsys\MSG91\Exceptions\ResponseError;
-use Craftsys\MSG91\Exceptions\TokenRequired;
+use Craftsys\MSG91\Exceptions\AuthKeyRequired;
 use Exception;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException;
@@ -19,7 +19,7 @@ class BaseMessage implements JsonSerializable
     const COUNTRY_KEY = "country";
     const MESSAGE_KEY = "message";
     const SENDER_KEY = "sender";
-    const TOKEN_KEY = "authkey";
+    const AUTH_KEY = "authkey";
 
     /**
      * HTTP Client
@@ -27,27 +27,38 @@ class BaseMessage implements JsonSerializable
      */
     protected $http;
 
+    /**
+     * Configuration
+     * @var Config
+     */
+    protected $config;
+
 
     /**
      * Payload for the message e.g. text, mobile number etc
      * @var array
      */
-    protected $payload = [
-        self::COUNTRY_KEY => 91,
-    ];
+    protected $payload = [];
 
-    public function __construct($token = null, HttpClient $httpClient = null)
+    public function __construct(Config $config, HttpClient $httpClient = null)
     {
         $this->http = $httpClient;
-        $this->token($token);
+        $this->setConfig($config);
+    }
+
+    protected function setConfig(Config $config)
+    {
+        $this->config = $config;
+        $this->key($this->config->get('key'));
+        return $this;
     }
 
     /**
-     * Set the authentication token
+     * Set the authentication key
      */
-    public function token(?string $token = null): self
+    public function key(?string $key = null): self
     {
-        return $this->setPayloadFor(static::TOKEN_KEY, $token);
+        return $this->setPayloadFor(static::AUTH_KEY, $key);
     }
 
     /**
@@ -130,9 +141,9 @@ class BaseMessage implements JsonSerializable
         return $this->http ?? new HttpClient();
     }
 
-    public function getToken()
+    public function getKey()
     {
-        return $this->getPayloadFor(static::TOKEN_KEY);
+        return $this->getPayloadFor(static::AUTH_KEY);
     }
 
     public function setHttpClient(HttpClient $httpClient = null): self
@@ -145,8 +156,8 @@ class BaseMessage implements JsonSerializable
     {
         $params = $this->toArray();
         // authentication token is required
-        if (!$this->getToken()) {
-            throw new TokenRequired();
+        if (!$this->getKey()) {
+            throw new AuthKeyRequired();
         }
         try {
             return new Response(

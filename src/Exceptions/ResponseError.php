@@ -11,6 +11,7 @@ class ResponseError extends Exception
      */
     public function __construct(?string $message = "")
     {
+        echo $message;
         return new Exception("MSG91 responded with an error. `{$message}`");
     }
 }
