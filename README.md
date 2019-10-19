@@ -23,7 +23,7 @@ This is a **PHP Client** for [MSG91 APIs](https://docs.msg91.com/collection/msg9
 The packages is available on [Packagist](https://packagist.org/packages/craftsys/msg91-php) and can be installed via [Composer](https://getcomposer.org/) by executing following command in shell.
 
 ```bash
-composer require creaftsys/msg91-php
+composer require craftsys/msg91-php
 ```
 
 ## Configuration
