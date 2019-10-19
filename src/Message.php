@@ -1,6 +1,6 @@
 <?php
 
-namespace Craftsys\MSG91;
+namespace Craftsys\MSG91Client;
 
 class Message extends BaseMessage
 {

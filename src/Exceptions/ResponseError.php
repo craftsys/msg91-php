@@ -1,6 +1,6 @@
 <?php
 
-namespace Craftsys\MSG91\Exceptions;
+namespace Craftsys\MSG91Client\Exceptions;
 
 use Exception;
 
@@ -11,7 +11,6 @@ class ResponseError extends Exception
      */
     public function __construct(?string $message = "")
     {
-        echo $message;
         return new Exception("MSG91 responded with an error. `{$message}`");
     }
 }

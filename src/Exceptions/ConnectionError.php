@@ -1,6 +1,6 @@
 <?php
 
-namespace Craftsys\MSG91\Exceptions;
+namespace Craftsys\MSG91Client\Exceptions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;

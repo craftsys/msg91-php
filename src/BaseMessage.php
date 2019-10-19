@@ -1,10 +1,10 @@
 <?php
 
-namespace Craftsys\MSG91;
+namespace Craftsys\MSG91Client;
 
-use Craftsys\MSG91\Exceptions\ConnectionError;
-use Craftsys\MSG91\Exceptions\ResponseError;
-use Craftsys\MSG91\Exceptions\AuthKeyRequired;
+use Craftsys\MSG91Client\Exceptions\ConnectionError;
+use Craftsys\MSG91Client\Exceptions\ResponseError;
+use Craftsys\MSG91Client\Exceptions\AuthKeyRequired;
 use Exception;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException;

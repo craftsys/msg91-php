@@ -41,12 +41,12 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "Craftsys\\MSG91\\": "src/"
+      "Craftsys\\MSG91Client\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Craftsys\\MSG91\\Test\\": "tests/"
+      "Craftsys\\MSG91Client\\Test\\": "tests/"
     }
   },
   "scripts": {

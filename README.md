@@ -67,15 +67,15 @@ Once you have [Configured](#configuration), client can be initialised by passing
 $config = [
 	'key' => "123456789012345678901234",
 ];
-$client = new Craftsys\MSG91\Client($config);
+$client = new Craftsys\MSG91Client\Client($config);
 ```
 
-The package in distributed under `Craftsys\MSG91` namespace which can used if your are working in a namespace environment.
+The package in distributed under `Craftsys\MSG91Client` namespace which can used if your are working in a namespace environment.
 
 ```php
 <?php
 // in your use statement sections
-use Craftsys\MSG91\Client;
+use Craftsys\MSG91Client\Client;
 
 // somewhere in this source file where you need the client
 $client = new Client();
@@ -90,13 +90,13 @@ Next, follow along with [examples](#examples) to learn more
 The client is responsible for interacting with MSG91 apis.
 
 ```php
-$client =  new Craftsys\MSG91\Client($config);
+$client =  new Craftsys\MSG91Client\Client($config);
 ```
 
 Client can also be initialised without a configuration which can be set by calling `setConfig($config)` method on the client instance.
 
 ```php
-$client =  new Craftsys\MSG91\Client();
+$client =  new Craftsys\MSG91Client\Client();
 $client->setConfig($config);
 ```
 
@@ -105,7 +105,7 @@ $client->setConfig($config);
 You can also pass a custom `GuzzleHttp\Client` as the second argument on the Client's constructor.
 
 ```php
-$client = new Craftsys\MSG91\Client($config, new GuzzleHttp\Client());
+$client = new Craftsys\MSG91Client\Client($config, new GuzzleHttp\Client());
 ```
 
 ### Managing OTPs
