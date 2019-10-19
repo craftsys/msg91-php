@@ -69,8 +69,6 @@ the service instance so your are free to chain methods in any order. All the par
 
 #### Send OTP
 
-> **Phone Number** and **Country** are required fields to send an OTP.
-
 - Basic Usage
 
 ```php
@@ -79,7 +77,6 @@ $otp = $client->otp();
 // $otp = $client->otp(4657);
 
 $otp->to(912343434312) // phone number with country code
-	->country(91) // country code of the phone number
 	->send(); // Finally, Send
 ```
 
@@ -88,14 +85,16 @@ $otp->to(912343434312) // phone number with country code
 Instead of relying on defaults from the MSG91 or the client, you can pass all the custom options that are accepted by MSG91 APIs.
 
 ```php
-$otp->to(91123123123)
-	->country(91)
+$otp->to(9999999999) // exluding the country code
+	->country(91) // set the country of the phone number
 	->digits(6) // set the number of digits in generated otp
 	->message("##OTP## is your verification code") // custom template
 	->from("MYSMS") // sender
 	->expiresInMinutes(60) // set the expiry
 	->send()
 ```
+
+> Country code is required, either by including country code into the phone number or by passing it via `->country` method.
 
 **NOTE**: If you are generating the OTP at your side, and passing it to the service, along with a custom message, you MUST include the `##OTP##` or actual value of OTP inside the message. Failing to do so will result in error
 
@@ -110,13 +109,12 @@ $client->otp(123123)->message("Use this for verification")->send();
 
 ### Verify OTP
 
-As the verification does not send any messages, we just need to provide the required fields to verify the OTP e.g. the sent OTP, Phone Number and Country.
+As the verification does not send any messages, we just need to provide the required fields to verify the OTP i.e. the sent OTP and the Phone Number.
 
 ```php
 $otp = $client->otp(12345);  // OTP to be verified
 
-$otp->to(912343434312) // phone number with country code
-	->country(91) // country code of the phone number
+$otp->to(919999999999) // phone number with country code
 	->verify(); // Verify
 ```
 
@@ -127,8 +125,7 @@ If there are any network/internal issue because of which user did not receive th
 ```php
 $otp = $client->otp();
 
-$otp->to(912343434312) // set the mobile with country code
-	->country(91) // set the country code
+$otp->to(919999999999) // set the mobile with country code
 	->via("text") // way of retry
 	->resend(); // resend otp
 ```
