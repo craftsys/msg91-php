@@ -1,6 +1,6 @@
 <?php
 
-namespace Craftsys\MSG91Client\Exceptions;
+namespace Craftsys\Msg91\Exceptions;
 
 use Exception;
 

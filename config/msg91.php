@@ -3,7 +3,7 @@
 
 /*
 |----------------------------------------------------------------------
-| Configuration for MSG91 Client
+| Configuration for Msg91 Client
 |----------------------------------------------------------------------
 | Set some default values for thenclient. All the defaults can be over
 | written at runtime.
@@ -15,7 +15,7 @@ return [
     | Authentication Token
     |--------------------------------------------------------------------------
     | Authentication token required for any communication with APIs. This can
-    | be retrieved from your MSG91's dashboard under the API > configuration
+    | be retrieved from your Msg91's dashboard under the API > configuration
     | section
      */
     'token' => '<your_token_here>',
@@ -62,7 +62,7 @@ return [
     | OTP Length
     |--------------------------------------------------------------------------
     | The default length of the OTPs. This can be used when we are not
-    | generating OTP on our end and letting the MSG91 generate and
+    | generating OTP on our end and letting the Msg91 generate and
     | store otp for us. This should be between from [4,9]
      */
     "otp_length" => 4,

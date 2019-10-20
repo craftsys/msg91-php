@@ -1,8 +1,8 @@
 <?php
 
-namespace Craftsys\MSG91Client\Test;
+namespace Craftsys\Tests\Msg91;
 
-use Craftsys\MSG91Client\Config;
+use Craftsys\Msg91\Config;
 
 class ConfigTest extends TestCase
 {

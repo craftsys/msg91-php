@@ -1,6 +1,6 @@
 {
   "name": "craftsys/msg91-php",
-  "description": "PHP Client for using MSG91's API.",
+  "description": "PHP Client for using Msg91's API.",
   "license": "MIT",
   "type": "library",
   "authors": [
@@ -41,12 +41,12 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "Craftsys\\MSG91Client\\": "src/"
+      "Craftsys\\Msg91\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Craftsys\\MSG91Client\\Test\\": "tests/"
+      "Craftsys\\Tests\\Msg91\\": "tests/"
     }
   },
   "scripts": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craftsys\MSG91Client;
+namespace Craftsys\Msg91;
 
 class URLs
 {

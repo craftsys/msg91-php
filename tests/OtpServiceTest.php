@@ -1,8 +1,8 @@
 <?php
 
-namespace Craftsys\MSG91Client\Test;
+namespace Craftsys\Tests\Msg91;
 
-use Craftsys\MSG91Client\Client;
+use Craftsys\Msg91\Client;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craftsys\MSG91Client\Test;
+namespace Craftsys\Tests\Msg91;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

@@ -1,8 +1,8 @@
-# PHP Client Library for MSG91
+# PHP Client Library for Msg91
 
 _This library requires a minimum PHP version of 7.1_
 
-This is a **PHP Client** for [MSG91 APIs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139). Before using it, please make sure you have an account on [MSG91](https://msg91.com/) and have an **Authkey** (MSG91 Dashboard > API > Configure).
+This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139). Before using it, please make sure you have an account on [Msg91](https://msg91.com/) and have an **Authkey** (Msg91 Dashboard > API > Configure).
 
 > **NOTE**: The project is under active development and so, some apis are subjected to change before of `v1.0.0` release.
 
@@ -43,15 +43,15 @@ Following configuration options are available:
 
 | Option      | Type                   | Description                                                                                                                                                                     | Default Value       |
 | :---------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------ |
-| key         | string                 | The authentication key for MSG91 apis (**required**)                                                                                                                            | null                |
+| key         | string                 | The authentication key for Msg91 apis (**required**)                                                                                                                            | null                |
 | otp_message | ?string                | Message template used when an OTP is sent. The **##OTP##** placeholder is required                                                                                              | Your OTP is ##OTP## |
 | retry_via   | ?enum("text", "voice") | Default method when resending an OTP when previous attempt of OTP send/verification failed. It can take one of "text" or "voice" values.                                        | text                |
 | country     | ?integer               | The country code when sending any requests. It's default value is set to **null** as using an internationalised phone number format (which includes country code) is preferred. | null                |
 | from        | ?string                | The default name for sender. This is used the **From** in messaging applications. It's value can only contain alphanumeric values.                                              | null                |
-| otp_length  | ?number                | Length of the generated OTP by MSG91 api when you are not generating OTPs on our end.. This can be between [4, 9]                                                               | 4                   |
+| otp_length  | ?number                | Length of the generated OTP by Msg91 api when you are not generating OTPs on our end.. This can be between [4, 9]                                                               | 4                   |
 | otp_expiry  | ?number                | Duration (in minutes) for which the OTP is valid.                                                                                                                               | 5                   |
 
-**NOTE**: Setting any if these values as null will override the default values to null too. And so, the default values from MSG91 APIs will be used. For example, setting the `otp_message` to `null` will let use "Your verification code is ##OTP##" which the default from [APIS](https://docs.msg91.com/collection/msg91-api-integration/5/send-otp-message/TZ6HN0YI)
+**NOTE**: Setting any if these values as null will override the default values to null too. And so, the default values from Msg91 APIs will be used. For example, setting the `otp_message` to `null` will let use "Your verification code is ##OTP##" which the default from [APIS](https://docs.msg91.com/collection/msg91-api-integration/5/send-otp-message/TZ6HN0YI)
 
 ## Usage
 
@@ -67,15 +67,15 @@ Once you have [Configured](#configuration), client can be initialised by passing
 $config = [
 	'key' => "123456789012345678901234",
 ];
-$client = new Craftsys\MSG91Client\Client($config);
+$client = new Craftsys\Msg91\Client($config);
 ```
 
-The package in distributed under `Craftsys\MSG91Client` namespace which can used if your are working in a namespace environment.
+The package in distributed under `Craftsys\Msg91` namespace which can used if your are working in a namespace environment.
 
 ```php
 <?php
 // in your use statement sections
-use Craftsys\MSG91Client\Client;
+use Craftsys\Msg91\Client;
 
 // somewhere in this source file where you need the client
 $client = new Client();
@@ -87,16 +87,16 @@ Next, follow along with [examples](#examples) to learn more
 
 ### Create a Client
 
-The client is responsible for interacting with MSG91 apis.
+The client is responsible for interacting with Msg91 apis.
 
 ```php
-$client =  new Craftsys\MSG91Client\Client($config);
+$client =  new Craftsys\Msg91\Client($config);
 ```
 
 Client can also be initialised without a configuration which can be set by calling `setConfig($config)` method on the client instance.
 
 ```php
-$client =  new Craftsys\MSG91Client\Client();
+$client =  new Craftsys\Msg91\Client();
 $client->setConfig($config);
 ```
 
@@ -105,13 +105,13 @@ $client->setConfig($config);
 You can also pass a custom `GuzzleHttp\Client` as the second argument on the Client's constructor.
 
 ```php
-$client = new Craftsys\MSG91Client\Client($config, new GuzzleHttp\Client());
+$client = new Craftsys\Msg91\Client($config, new GuzzleHttp\Client());
 ```
 
 ### Managing OTPs
 
 OTP services like sending, verifying, and resending etc, can be accessed via `otp` method on the client instance e.g. `$client->otp()`. OTP service provides a fluent API for sending. All the methods except `send|verify|resend`, return
-the service instance so your are free to chain methods in any order. All the parameters which are available for the MSG91 API, have a corresponding intuitive method name e.g. to set the country for the send OTP request, you call the `country` method on the service.
+the service instance so your are free to chain methods in any order. All the parameters which are available for the Msg91 API, have a corresponding intuitive method name e.g. to set the country for the send OTP request, you call the `country` method on the service.
 
 #### Send OTP
 
@@ -128,7 +128,7 @@ $otp->to(912343434312) // phone number with country code
 
 **Advanced Usage**
 
-Instead of relying on defaults from the MSG91 or the client, you can pass all the custom options that are accepted by MSG91 APIs.
+Instead of relying on defaults from the Msg91 or the client, you can pass all the custom options that are accepted by Msg91 APIs.
 
 ```php
 $otp->to(91123123123)
