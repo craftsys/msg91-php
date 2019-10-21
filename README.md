@@ -175,3 +175,15 @@ $otp->to(912343434312) // set the mobile with country code
 	->viaText() // or ->viaVoice()
 	->resend(); // resend otp
 ```
+
+## Sending SMS
+
+To send SMS, access the `SMSService` by calling `->sms()` method on the client instance
+
+```php
+$sms = $client->sms();
+
+$sms->to(912343434312) // set the mobile with country code
+	->message("Your message here") // message content
+	->send(); // send the message
+```

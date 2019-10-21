@@ -126,14 +126,36 @@ class Options
     }
 
     /**
-     * Set the receipient of the message
+     * Set the receipient of the message, used in OTP apis
+     * @param int|null $mobile - receipient's mobile number
+     * @return $this
+     */
+    public function mobile($mobile = null)
+    {
+        $this->setPayloadFor('mobile', $mobile);
+        return $this;
+    }
+
+    /**
+     * Set the receipients of the message, used in SMS apis
      * @param int|null $mobile - receipient's mobile number(s)
+     * @return $this
+     */
+    public function mobiles($mobiles = null)
+    {
+        $this->setPayloadFor('mobiles', $mobiles);
+        return $this;
+    }
+
+    /**
+     * Set the receipients of the message
+     * @param int|null $mobile - receipient's mobile number
      * @return $this
      */
     public function to($mobile = null)
     {
-        $this->setPayloadFor('mobile', $mobile);
-        $this->setPayloadFor('mobiles', $mobile);
+        $this->mobile($mobile);
+        $this->mobiles($mobile);
         return $this;
     }
 

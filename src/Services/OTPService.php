@@ -17,6 +17,17 @@ class OTPService extends Service
     }
 
     /**
+     * Set the receipients of the message
+     * @param int|null $mobile - receipient's mobile number
+     * @return $this
+     */
+    public function to($mobile = null)
+    {
+        $this->options->mobile($mobile);
+        return $this;
+    }
+
+    /**
      * Set the method of resending OTP to "text"
      * @return $this
      */
