@@ -247,6 +247,7 @@ class Options
             case is_string($options):
                 // if it's a string
                 $this->content($options);
+                break;
             case $options instanceof Closure:
                 // let it mutate if it's a closure
                 $this->tap($options);
