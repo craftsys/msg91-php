@@ -212,6 +212,16 @@ class Options
         return $this->payload;
     }
 
+
+    /**
+     * Get the options's array
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->payload;
+    }
+
     /**
      * Call the given Closure with this instance then return the instance.
      *

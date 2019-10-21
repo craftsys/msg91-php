@@ -14,6 +14,6 @@ class Msg91Message extends Options implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->getPayload();
+        return $this->toArray();
     }
 }
