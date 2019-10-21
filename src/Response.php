@@ -2,62 +2,91 @@
 
 namespace Craftsys\Msg91;
 
-use Psr\Http\Message\ResponseInterface;
-use Exception;
+use GuzzleHttp\Psr7\Response as GuzzleHttpResponse;
 
 class Response
 {
     /**
-     * Response
-     * @var ResponseInterface
+     * Http client
+     * @var \GuzzleHttp\Psr7\Response
      */
     protected $response;
 
     /**
-     * Body of the response
-     * @var array | null
-     */
-    protected $body;
-
-    /**
-     * Status code of the response
+     * Status of the
      * @var int
      */
-    protected $status_code;
+    protected $status = 422;
 
-    public function __construct(ResponseInterface $response)
+    /**
+     * Response data
+     * @var array
+     */
+    protected $data = [];
+
+    /**
+     * Response errors
+     * @var array|null
+     */
+    protected $errors = null;
+
+    /**
+     * Response message
+     * @var string
+     */
+    protected $message = "";
+
+    public function __construct(GuzzleHttpResponse $response)
     {
         $this->response = $response;
         $this->handle();
     }
 
+    /**
+     * Handle the request
+     */
     protected function handle()
     {
         $response = $this->response;
-        $this->status_code = $response->getStatusCode();
+        $status_code = $response->getStatusCode();
         $body = (array) json_decode($response->getBody()->getContents());
-        $this->body = $body;
-        if ($body["type"] === "error") {
-            // if we have an error, change the status code
-            if ($this->status_code === 200) {
-                $this->status_code = 422;
+        if ($body) {
+            $this->data = $body;
+            if (isset($body['type'])) {
+                $type = $body['type'];
+                if ($type === "error") {
+                    $status_code = 422;
+                }
             }
-            throw new Exception($body['message']);
+            $this->message = $body["message"] ?? "No response message";
         }
+        $this->status_code = $status_code;
     }
 
-    public function getStatusCode(): int
+    /**
+     * Get the response status code
+     * @var int
+     */
+    public function getStatusCode()
     {
         return $this->status_code;
     }
 
-    public function getBody(): ?array
+    /**
+     * Get the response data
+     * @var array
+     */
+    public function getData()
     {
-        return $this->body;
+        return $this->data;
     }
 
-    public function hasErrors()
+    /**
+     * Get the response message
+     * @return string
+     */
+    public function getMessage()
     {
-        return $this->status_code !== 200;
+        return $this->message;
     }
 }

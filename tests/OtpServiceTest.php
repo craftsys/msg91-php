@@ -3,6 +3,9 @@
 namespace Craftsys\Tests\Msg91;
 
 use Craftsys\Msg91\Client;
+use Craftsys\Msg91\Exceptions\ValidationException;
+use Craftsys\Msg91\Options;
+use Craftsys\Msg91\Response as CraftsysResponse;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -40,11 +43,12 @@ class OtpServiceTest extends TestCase
     public function test_otp_send()
     {
         $phone_number = 919999999999;
-        $payload = (new Client($this->config, $this->createMockHttpClient()))
+        $response = (new Client($this->config, $this->createMockHttpClient()))
             ->otp()
             ->to($phone_number)
             ->send();
-        $this->assertNotNull($payload);
+
+        $this->assertInstanceOf(CraftsysResponse::class, $response);
         // make sure there was exacly on request
         $this->assertCount(1, $this->container);
         // check the request
@@ -64,11 +68,11 @@ class OtpServiceTest extends TestCase
     {
         $phone_number = 919999999999;
         $otp = 1234;
-        $payload = (new Client($this->config, $this->createMockHttpClient()))
+        $response = (new Client($this->config, $this->createMockHttpClient()))
             ->otp($otp)
             ->to($phone_number)
             ->verify();
-        $this->assertNotNull($payload);
+        $this->assertInstanceOf(CraftsysResponse::class, $response);
         // make sure there was exacly on request
         $this->assertCount(1, $this->container);
         // check the request
@@ -84,5 +88,14 @@ class OtpServiceTest extends TestCase
         $this->assertEquals($this->config['key'], $data['authkey']);
         $this->assertArrayHasKey('otp', $data);
         $this->assertEquals($otp, $data['otp']);
+    }
+    public function test_api_key_required()
+    {
+        $phone_number = 919999999999;
+        $this->expectException(ValidationException::class);
+        (new Client([], $this->createMockHttpClient()))
+            ->otp()
+            ->to($phone_number)
+            ->send();
     }
 }

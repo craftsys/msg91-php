@@ -31,22 +31,13 @@ return [
 
     /**
     |--------------------------------------------------------------------------
-    | Retry OTP Method
+    | Resend OTP Method
     |--------------------------------------------------------------------------
     | This sets the default method of communication when attempting to resend
     | the OTP. We have two ways: text or voice.
      */
-    "retry_via" => "text",
+    "resend_otp_method" => "text",
 
-    /**
-    |--------------------------------------------------------------------------
-    | Country of Phone Numbers
-    |--------------------------------------------------------------------------
-    | Country code is required for any kind of communication with the apis. It
-    | can be included in the phone number itself (preferred) or by explicitily
-    | setting it's value here or at runtime.
-     */
-    "country" => null,
 
     /**
     |--------------------------------------------------------------------------
@@ -75,4 +66,23 @@ return [
     | values is 1 minute. Use integer values only.
      */
     "otp_expiry" => 5,
+
+    /**
+    |--------------------------------------------------------------------------
+    | Route for SMS
+    |--------------------------------------------------------------------------
+    | If your operator supports multiple routes then give one route name.
+    | Eg: route=1 for promotional, route=4 for transactional SMS.
+    | For SendOTP routes, use otp api instead of sms
+     */
+    "route" => null,
+
+    /**
+    |--------------------------------------------------------------------------
+    | Route for SMS
+    |--------------------------------------------------------------------------
+    | If all your messages includes unicode, set it's value to 1, else set
+    | it when calling the sms apis.
+     */
+    "unicode" => 0,
 ];

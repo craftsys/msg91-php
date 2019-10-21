@@ -76,6 +76,28 @@ class Config
     }
 
     /**
+     * Get Msg91Message instance for this config
+     * @return \Craftsys\Msg91\Options
+     */
+    public function getOptions()
+    {
+        return (new Options)
+            ->key($this->get('key'))
+            ->message($this->get('otp_message'))
+            ->method($this->get('resend_otp_method'))
+            ->from($this->get('from'))
+            ->digits($this->get('otp_length'))
+            ->expiresInMinutes($this->get('otp_expiry'))
+            ->route($this->get('route'))
+            ->tap(function (Options $msg) {
+                // set the unicode if it's set to true
+                if ($this->get('unicode')) {
+                    $msg->unicode();
+                }
+            });
+    }
+
+    /**
      * Get all the configuration values
      */
     public function all(): array

@@ -2,52 +2,85 @@
 
 namespace Craftsys\Msg91;
 
-use GuzzleHttp\Client as HttpClient;
+use Craftsys\Msg91\Services\OTPService;
+use GuzzleHttp\Client as GuzzleHttpClient;
 
+/**
+ * The Msg91 Client. This is responsible for all the interactions with
+ * the msg91 apis.
+ */
 class Client
 {
     /**
-     * HTTP Client
-     * @var HttpClient
-     */
-    protected $http;
-
-
-    /**
-     * Configuration
-     * @var Config
+     * Client's configuration
+     * @var \Craftsys\Msg91\Client
      */
     protected $config;
 
+    /**
+     * Http Client for sending requests
+     * @var \GuzzleHttp\Client;
+     */
+    protected $httpClient;
 
-    public function __construct(array $config = null, HttpClient $httpClient = null)
+    /**
+     * Construct a new Msg91 Client instance
+     *
+     * @param array|null $config
+     * @param \GuzzleHttp\Client $httpClient
+     * @return void
+     */
+    public function __construct($config = null, GuzzleHttpClient $httpClient = null)
     {
+        $this->httpClient = $httpClient;
         $this->config = new Config($config);
-        $this->http = $httpClient;
     }
 
     /**
-     * Get the configuration
+     * Return the configuration
+     * @return \Craftsys\Msg91\Config
      */
-    public function getConfig(): Config
+    public function getConfig()
     {
         return $this->config;
     }
 
     /**
-     * Set the new configuration
+     * Set the configuration
+     * @param array|null $config
+     * @return $this
      */
-    public function setConfig(array $config = null): self
+    public function setConfig($config = null)
     {
         $this->config = new Config($config);
         return $this;
     }
 
     /**
-     * The OTP service which provide functionality for sending, verifying and resending OTPs
+     * Set the http client
      */
-    public function otp($otp = null): OTPMessage
+    public function setHttpClient(GuzzleHttpClient $httpClient): self
     {
-        return new OTPMessage($this->config, $otp, $this->http);
+        $this->httpClient = $httpClient;
+        return $this;
+    }
+
+    /**
+     * Get the http client
+     */
+    public function getHttpClient(): GuzzleHttpClient
+    {
+        return $this->httpClient ?: new GuzzleHttpClient();
+    }
+
+    /**
+     * Access to OPT services
+     *
+     * @param mixed $payload - initial payload for request
+     * @return \Craftsys\Msg91\Services\OTPService
+     */
+    public function otp($payload = null)
+    {
+        return new OTPService($this, $payload);
     }
 }
