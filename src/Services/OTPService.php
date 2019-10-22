@@ -4,6 +4,7 @@ namespace Craftsys\Msg91\Services;
 
 use Craftsys\Msg91\Requests\SendOTPRequest;
 use Craftsys\Msg91\Requests\VerifyOTPRequest;
+use Craftsys\Msg91\Requests\ResendOTPRequest;
 
 class OTPService extends Service
 {
@@ -71,5 +72,7 @@ class OTPService extends Service
     }
 
     public function resend()
-    { }
+    {
+        return $this->sendRequest(ResendOTPRequest::class);
+    }
 }

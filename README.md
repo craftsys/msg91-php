@@ -17,6 +17,8 @@ This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg9
         -   [Send OTP](#send-otp)
         -   [Verify OTP](#verify-otp)
         -   [Resend OTP](#resend-otp)
+    -   [Sending SMS](#sending-sms)
+    -   [Handling Error Reponses](#error-responses)
 
 ## Installation
 
@@ -186,4 +188,44 @@ $sms = $client->sms();
 $sms->to(912343434312) // set the mobile with country code
 	->message("Your message here") // message content
 	->send(); // send the message
+```
+
+To add any more options to the message, you can call the `options` method before sending the message. The options
+method accepts a call which will receive a `\Craftsys\Msg91\Options` instance. Using it, you can modify any desired
+option.
+
+```php
+$client->sms()
+    ->to(919999999999)
+    ->options(function ($options) {
+        $options->transactional() // set that it is a transactional message
+            ->from('THEONE') // set the sender
+            ->unicode(); // handle unicode as the message contains unicode characters
+    })
+    ->message("I ❤️ this package. Thanks.")
+    ->send();
+```
+
+## Error Responses
+
+All the services will return `\Craftsys\Msg91\Response` instance for all successfully responses or will throw
+exceptions if request validation failed (`\Craftsys\Msg91\Exceptions\ValidationException`)or there was an error in the response (`\Craftsys\Msg91\Exceptions\ResponseErrorException`).
+
+```php
+try {
+    $response = $client->otp()->to(919999999999)->send();
+    // response data
+    // $response->getData();
+    // response message
+    // $response->getMessage();
+    // response status code
+    // $response->getStatusCode();
+} catch (\Craftsys\Msg91\Exceptions\ValidationException $e) {
+    // issue with the request e.g. token not provided
+} catch (\Craftsys\Msg91\Exceptions\ResponseErrorException $e) {
+    // error thrown by msg91 apis or by http client
+} catch (\Exception $e) {
+    // something else went wrong
+    // plese report if this happens :)
+}
 ```

@@ -5,19 +5,19 @@ namespace Craftsys\Msg91\Requests;
 class URLs
 {
     /**
-     * URl for Send OTP Request
+     * URL for Send OTP Request
      * @var string
      */
     const OTP_URL = "https://api.msg91.com/api/v5/otp";
 
     /**
-     * URl for Verify OTP
+     * URL for Verify OTP
      * @var string
      */
     const OTP_VERIFY_URL = "https://api.msg91.com/api/v5/otp/verify";
 
     /**
-     * URl for Resend OTP Request
+     * URL for Resend OTP Request
      * @var string
      */
     const OTP_RESEND_URL = "https://api.msg91.com/api/v5/otp/resend";

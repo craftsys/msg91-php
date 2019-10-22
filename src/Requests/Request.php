@@ -2,6 +2,7 @@
 
 namespace Craftsys\Msg91\Requests;
 
+use Craftsys\Msg91\Exceptions\ResponseErrorException;
 use Craftsys\Msg91\Exceptions\ValidationException;
 use Craftsys\Msg91\Options;
 use Craftsys\Msg91\Response;
@@ -18,24 +19,29 @@ abstract class Request
 
     /**
      * Options for the request
+     *
      * @var \Craftsys\Msg91\Options
      */
     protected $options;
 
     /**
      * Request Method
+     *
      * @var string
      */
     protected $method = "POST";
 
     /**
      * Request url
+     *
      * @var string
      */
     protected $url = "";
 
     /**
      * Validation instance
+     *
+     * @var \Craftsys\Msg91\Requests\Validator
      */
     protected $validator;
 
@@ -55,9 +61,13 @@ abstract class Request
 
     /**
      * Get the request payload
+     *
      * @return array
      */
-    abstract protected function getPayload(): array;
+    protected function getPayload()
+    {
+        return $this->options->getPayload();
+    }
 
     protected function validate(array $payload)
     {
@@ -83,10 +93,19 @@ abstract class Request
             throw new ValidationException('Invalid request parameters', 422, null, $this->validator->errors());
         }
         $method = strtolower($this->method);
-        return new Response(
-            $client->{$method}($this->url, [
-                "form_params" => $payload
-            ])
-        );
+        try {
+            return new Response(
+                $client->{$method}($this->url, [
+                    "form_params" => $payload
+                ])
+            );
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            throw new ResponseErrorException(
+                $e->getMessage(),
+                $e->getCode(),
+                $e,
+                (array) json_decode($e->getResponse()->getBody()->getContents())
+            );
+        }
     }
 }

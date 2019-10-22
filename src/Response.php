@@ -2,6 +2,7 @@
 
 namespace Craftsys\Msg91;
 
+use Craftsys\Msg91\Exceptions\ResponseErrorException;
 use GuzzleHttp\Psr7\Response as GuzzleHttpResponse;
 
 class Response
@@ -61,6 +62,9 @@ class Response
             $this->message = $body["message"] ?? "No response message";
         }
         $this->status_code = $status_code;
+        if ((int) $status_code / 100 !== 2) {
+            throw new ResponseErrorException($this->message, $status_code, null, $this->data);
+        }
     }
 
     /**
