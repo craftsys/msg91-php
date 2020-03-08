@@ -18,7 +18,9 @@ This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg9
         -   [Verify OTP](#verify-otp)
         -   [Resend OTP](#resend-otp)
     -   [Sending SMS](#sending-sms)
-    -   [Handling Error Reponses](#error-responses)
+    -   [Handling Reponses](#handling-reponses)
+-   [Related](#related)
+-   [Acknowledgements](#acknowledgements)
 
 ## Installation
 
@@ -206,10 +208,12 @@ $client->sms()
     ->send();
 ```
 
-## Error Responses
+## Handling Responses
 
-All the services will return `\Craftsys\Msg91\Response` instance for all successfully responses or will throw
-exceptions if request validation failed (`\Craftsys\Msg91\Exceptions\ValidationException`)or there was an error in the response (`\Craftsys\Msg91\Exceptions\ResponseErrorException`).
+All the services will return `\Craftsys\Msg91\Response` instance for all successfully responses and will throw
+exceptions if
+- \Craftsys\Msg91\Exceptions\ValidationException: request validation failed
+- \Craftsys\Msg91\Exceptions\ResponseErrorException: there was an error in the response
 
 ```php
 try {
@@ -226,6 +230,18 @@ try {
     // error thrown by msg91 apis or by http client
 } catch (\Exception $e) {
     // something else went wrong
-    // plese report if this happens :)
+    // please report if this happens :)
 }
 ```
+
+# Related
+
+- [Msg91 Laravel Service Provider](https://github.com/craftsys/msg91-laravel)
+- [Msg91 Laravel Notification Channel](https://github.com/craftsys/msg91-laravel-notification-channel)
+- [Msg91 Api Docs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139)
+
+# Acknowledgements
+
+We are grateful to the authors of existing related projects for their ideas and collaboration:
+
+- [Nexmo Laravel](https://github.com/Nexmo/nexmo-laravel)
