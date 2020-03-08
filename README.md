@@ -244,4 +244,4 @@ try {
 
 We are grateful to the authors of existing related projects for their ideas and collaboration:
 
-- [Nexmo Laravel](https://github.com/Nexmo/nexmo-laravel)
+- [Nexmo PHP](https://github.com/Nexmo/nexmo-php)
