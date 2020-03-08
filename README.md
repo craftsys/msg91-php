@@ -18,7 +18,7 @@ This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg9
         -   [Verify OTP](#verify-otp)
         -   [Resend OTP](#resend-otp)
     -   [Sending SMS](#sending-sms)
-    -   [Handling Reponses](#handling-reponses)
+    -   [Handling Responses](#handling-responses)
 -   [Related](#related)
 -   [Acknowledgements](#acknowledgements)
 
@@ -139,7 +139,7 @@ $otp->to(91123123123)
     ->options(function (\Craftsys\Msg91\Options $options) {
         $options->digits(6) // set the number of digits in generated otp
         ->message("##OTP## is your verification code") // custom template
-        ->from("MYSMS") // sender
+        ->from("CMPNY") // sender
         ->expiresInMinutes(60); // set the expiry
     })
 	->send() // finally send
@@ -188,7 +188,7 @@ To send SMS, access the `SMSService` by calling `->sms()` method on the client i
 $sms = $client->sms();
 
 $sms->to(912343434312) // set the mobile with country code
-	->message("Your message here") // message content
+	->message("You have 10 pending tasks for the end of the day") // message content
 	->send(); // send the message
 ```
 
@@ -201,7 +201,7 @@ $client->sms()
     ->to(919999999999)
     ->options(function ($options) {
         $options->transactional() // set that it is a transactional message
-            ->from('THEONE') // set the sender
+            ->from('CMPNY') // set the sender
             ->unicode(); // handle unicode as the message contains unicode characters
     })
     ->message("I ❤️ this package. Thanks.")
