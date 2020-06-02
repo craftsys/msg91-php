@@ -5,7 +5,6 @@ namespace Craftsys\Tests\Msg91;
 use Craftsys\Msg91\Client;
 use Craftsys\Msg91\Exceptions\ResponseErrorException;
 use Craftsys\Msg91\Exceptions\ValidationException;
-use Craftsys\Msg91\Options;
 use Craftsys\Msg91\Response as CraftsysResponse;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Handler\MockHandler;
