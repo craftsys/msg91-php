@@ -22,7 +22,7 @@
         "email": "luckysud4@gmail.com"
     },
     "require": {
-        "php": "^7.3",
+        "php": ">=7.1",
         "guzzlehttp/guzzle": "^6.5.5|^7.0.1"
     },
     "require-dev": {
