@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/craftsys/msg91-php/compare/v0.8.1...v0.9.0) (2020-09-18)
+
+
+### Features
+
+* **deps:** support for guzzlehttp/guzzle^7 ([694ffe2](https://github.com/craftsys/msg91-php/commit/694ffe2a146c1da4549ef78f9cbf06b870cececb))
+
 ## [0.8.1](https://github.com/craftsys/msg91-php/compare/v0.8.0...v0.8.1) (2020-06-01)
 
 
