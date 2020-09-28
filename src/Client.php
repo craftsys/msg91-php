@@ -2,8 +2,8 @@
 
 namespace Craftsys\Msg91;
 
-use Craftsys\Msg91\Services\OTPService;
-use Craftsys\Msg91\Services\SMSService;
+use Craftsys\Msg91\OTP\Service as OTPService;
+use Craftsys\Msg91\SMS\Service as SMSService;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 /**
@@ -14,7 +14,7 @@ class Client
 {
     /**
      * Client's configuration
-     * @var \Craftsys\Msg91\Client
+     * @var \Craftsys\Msg91\Config
      */
     protected $config;
 
@@ -78,9 +78,8 @@ class Client
      * Access to OPT services
      *
      * @param mixed $payload - initial payload for request
-     * @return \Craftsys\Msg91\Services\OTPService
      */
-    public function otp($payload = null)
+    public function otp($payload = null): OTPService
     {
         return new OTPService($this, $payload);
     }
@@ -89,9 +88,8 @@ class Client
      * Access to SMS services
      *
      * @param mixed $payload - initial payload for request
-     * @return \Craftsys\Msg91\Services\SMSService
      */
-    public function sms($payload = null)
+    public function sms($payload = null): SMSService
     {
         return new SMSService($this, $payload);
     }

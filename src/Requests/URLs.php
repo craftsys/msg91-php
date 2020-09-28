@@ -26,5 +26,5 @@ class URLs
      * URL for send sms
      * @var string
      */
-    const SEND_SMS_URL = "https://api.msg91.com/api/sendhttp.php";
+    const SEND_SMS_URL = "https://api.msg91.com/api/v5/flows/";
 }

@@ -3,7 +3,6 @@
 namespace Craftsys\Tests\Msg91;
 
 use Craftsys\Msg91\Client;
-use Craftsys\Msg91\Exceptions\ValidationException;
 use Craftsys\Msg91\Response as CraftsysResponse;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Handler\MockHandler;
@@ -46,6 +45,7 @@ class SMSServiceTest extends TestCase
         $response = (new Client($this->config, $this->createMockHttpClient()))
             ->sms()
             ->message($message)
+            ->flow("flow_id_here")
             ->to($phone_number)
             ->send();
 
@@ -60,7 +60,7 @@ class SMSServiceTest extends TestCase
         $data = [];
         parse_str($transaction['request']->getBody()->getContents(), $data);
         $this->assertArrayHasKey('mobiles', $data);
-        $this->assertEquals($phone_number, $data['mobiles']);
+        $this->assertEquals([$phone_number], $data['mobiles']);
         $this->assertArrayHasKey('authkey', $data);
         $this->assertEquals($this->config['key'], $data['authkey']);
         $this->assertArrayHasKey('message', $data);

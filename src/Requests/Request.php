@@ -10,7 +10,6 @@ use GuzzleHttp\Client as GuzzleHttpClient;
 
 abstract class Request
 {
-
     /**
      * Http client for request handling
      * @var \GuzzleHttp\Client
@@ -96,7 +95,10 @@ abstract class Request
         try {
             return new Response(
                 $client->{$method}($this->url, [
-                    "form_params" => $payload
+                    "form_params" => $payload,
+                    "headers" => [
+                        'authkey' => $payload['authkey']
+                    ]
                 ])
             );
         } catch (\GuzzleHttp\Exception\ClientException $e) {

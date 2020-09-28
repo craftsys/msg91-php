@@ -1,13 +1,31 @@
 <?php
 
-namespace Craftsys\Msg91\Services;
+namespace Craftsys\Msg91\OTP;
 
-use Craftsys\Msg91\Requests\SendOTPRequest;
-use Craftsys\Msg91\Requests\VerifyOTPRequest;
-use Craftsys\Msg91\Requests\ResendOTPRequest;
+use Craftsys\Msg91\Client;
+use Craftsys\Msg91\Service as ServicesService;
 
-class OTPService extends Service
+class Service extends ServicesService
 {
+    /**
+     * Options for Request
+     * @var \Craftsys\Msg91\OTP\Options
+     */
+    protected $options;
+
+    /**
+     * Create a new service instance
+     * @param \Craftsys\Msg91\Client $client
+     * @param int|string|\Craftsys\Msg91\OTP\Options|\Craftsys\Msg91\Msg91Message $payload
+     * @return void
+     */
+    public function __construct(Client $client, $payload = null)
+    {
+        $this->client = $client;
+        $this->options = (new Options())->resolveConfig($this->client->getConfig());
+        $this->updateOptionsWithPayload($payload);
+    }
+
     protected function updateOptionsWithPayload($payload = null)
     {
         if (is_int($payload)) {
@@ -24,7 +42,7 @@ class OTPService extends Service
      */
     public function to($mobile = null)
     {
-        $this->options->mobile($mobile);
+        $this->options->to($mobile);
         return $this;
     }
 
@@ -58,21 +76,31 @@ class OTPService extends Service
     }
 
     /**
+     * Set the template id for OTPs
+     * @return $this
+     */
+    public function template($template_id = null)
+    {
+        $this->options->template($template_id);
+        return $this;
+    }
+
+    /**
      * Send otp
      * @return \Craftsys\Msg91\Response
      */
     public function send()
     {
-        return $this->sendRequest(SendOTPRequest::class);
+        return $this->sendRequest(SendRequest::class);
     }
 
     public function verify()
     {
-        return $this->sendRequest(VerifyOTPRequest::class);
+        return $this->sendRequest(VerifyRequest::class);
     }
 
     public function resend()
     {
-        return $this->sendRequest(ResendOTPRequest::class);
+        return $this->sendRequest(ResendRequest::class);
     }
 }

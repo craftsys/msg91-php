@@ -132,11 +132,12 @@ $otp->to(912343434312) // phone number with country code
 
 **Advanced Usage**
 
-Instead of relying on defaults from the Msg91 or the client, you can pass all the custom options that are accepted by Msg91 APIs using the `options` helper on the service. This method accepts a close which will be called with underline `\Craftsys\Msg91\Options` instance and gives your the full flexibility to add any options that is required.
+Instead of relying on defaults from the Msg91 or the client, you can pass all the custom options that are accepted by Msg91 APIs using the `options` helper on the service. This method accepts a close which will be called with underline `\Craftsys\Msg91\OTP\Options` instance and gives your the full flexibility to add any options that is required.
 
 ```php
 $otp->to(91123123123)
-    ->options(function (\Craftsys\Msg91\Options $options) {
+    ->template("AFH") // template id for otps
+    ->options(function (\Craftsys\Msg91\OTP\Options $options) {
         $options->digits(6) // set the number of digits in generated otp
         ->message("##OTP## is your verification code") // custom template
         ->from("CMPNY") // sender
@@ -193,7 +194,7 @@ $sms->to(912343434312) // set the mobile with country code
 ```
 
 To add any more options to the message, you can call the `options` method before sending the message. The options
-method accepts a call which will receive a `\Craftsys\Msg91\Options` instance. Using it, you can modify any desired
+method accepts a call which will receive a `\Craftsys\Msg91\SMS\Options` instance. Using it, you can modify any desired
 option.
 
 ```php
@@ -212,8 +213,9 @@ $client->sms()
 
 All the services will return `\Craftsys\Msg91\Response` instance for all successfully responses and will throw
 exceptions if
-- \Craftsys\Msg91\Exceptions\ValidationException: request validation failed
-- \Craftsys\Msg91\Exceptions\ResponseErrorException: there was an error in the response
+
+-   \Craftsys\Msg91\Exceptions\ValidationException: request validation failed
+-   \Craftsys\Msg91\Exceptions\ResponseErrorException: there was an error in the response
 
 ```php
 try {
@@ -236,12 +238,12 @@ try {
 
 # Related
 
-- [Msg91 Laravel Service Provider](https://github.com/craftsys/msg91-laravel)
-- [Msg91 Laravel Notification Channel](https://github.com/craftsys/msg91-laravel-notification-channel)
-- [Msg91 Api Docs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139)
+-   [Msg91 Laravel Service Provider](https://github.com/craftsys/msg91-laravel)
+-   [Msg91 Laravel Notification Channel](https://github.com/craftsys/msg91-laravel-notification-channel)
+-   [Msg91 Api Docs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139)
 
 # Acknowledgements
 
 We are grateful to the authors of existing related projects for their ideas and collaboration:
 
-- [Nexmo PHP](https://github.com/Nexmo/nexmo-php)
+-   [Nexmo PHP](https://github.com/Nexmo/nexmo-php)

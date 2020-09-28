@@ -4,7 +4,7 @@ namespace Craftsys\Msg91;
 
 use Closure;
 
-class Options
+abstract class Options
 {
     /**
      * Payload for the message
@@ -33,18 +33,7 @@ class Options
         return $this;
     }
 
-    /**
-     * Set method for the message ("text" | "voice")
-     * Only usefull for otp retry
-     *
-     * @param string|null $via
-     * @return $this
-     */
-    public function method($via = null)
-    {
-        $this->setPayloadFor('retrytype', $via);
-        return $this;
-    }
+    abstract public function to($mobile = null): self;
 
     /**
      * Set the sender of the message
@@ -57,62 +46,6 @@ class Options
         return $this;
     }
 
-    /**
-     * Set the number of digits in otp. Must be in [4,9]
-     * @param int|null $otp_digits
-     * @return  $this
-     */
-    public function digits($otp_length = null)
-    {
-        $this->setPayloadFor('otp_length', $otp_length);
-        return $this;
-    }
-
-    /**
-     * Set the expiry time for the otps in minutes
-     * @param int|null $minutes
-     * @return $this
-     */
-    public function expiresInMinutes($minutes = null)
-    {
-        $this->setPayloadFor('otp_expiry', $minutes);
-        return $this;
-    }
-
-    /**
-     * Set if the message is of transactional type (route = 4)
-     *
-     * @return $this
-     */
-    public function transactional()
-    {
-        $this->route(4);
-        return $this;
-    }
-
-    /**
-     * Set if the message is of promotional type (route = 1)
-     *
-     * @return $this
-     */
-    public function promotional()
-    {
-        $this->route(1);
-        return $this;
-    }
-
-    /**
-     * Set the route for the sms.
-     * Use `promotional` or `transactional` instead of your are not sure about route values
-     *
-     * @param int|null $route
-     * @return $this
-     */
-    public function route($route = null)
-    {
-        $this->setPayloadFor('route', $route);
-        return $this;
-    }
 
     /**
      * Set if the message contains unicode characters
@@ -130,7 +63,7 @@ class Options
      * @param int|null $mobile - receipient's mobile number
      * @return $this
      */
-    public function mobile($mobile = null)
+    protected function mobile($mobile = null)
     {
         $this->setPayloadFor('mobile', $mobile);
         return $this;
@@ -141,32 +74,9 @@ class Options
      * @param int|null $mobile - receipient's mobile number(s)
      * @return $this
      */
-    public function mobiles($mobiles = null)
+    protected function mobiles($mobiles = null)
     {
         $this->setPayloadFor('mobiles', $mobiles);
-        return $this;
-    }
-
-    /**
-     * Set the receipients of the message
-     * @param int|null $mobile - receipient's mobile number
-     * @return $this
-     */
-    public function to($mobile = null)
-    {
-        $this->mobile($mobile);
-        $this->mobiles($mobile);
-        return $this;
-    }
-
-    /**
-     * Set the otp for the message
-     * @param int|null $otp
-     * @return $this
-     */
-    public function otp($otp = null)
-    {
-        $this->setPayloadFor('otp', $otp);
         return $this;
     }
 
@@ -190,6 +100,7 @@ class Options
         $this->setPayloadFor('message', $message);
         return $this;
     }
+
 
     /**
      * Set the payload for a given key
@@ -265,4 +176,9 @@ class Options
         }
         return $this;
     }
+
+    /**
+     * Resolve the configuration options
+     */
+    public abstract function resolveConfig(Config $config);
 }

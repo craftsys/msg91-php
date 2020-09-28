@@ -1,9 +1,7 @@
 <?php
 
-namespace Craftsys\Msg91\Services;
+namespace Craftsys\Msg91;
 
-use Closure;
-use Craftsys\Msg91\Client;
 use GuzzleHttp\Client as HttpClient;
 
 abstract class Service
@@ -16,21 +14,10 @@ abstract class Service
 
     /**
      * Options for Request
-     * @var \Craftsys\Msg91\Options
      */
-    protected $options;
-
-    /**
-     * Create a new service instance
-     * @param \Craftsys\Msg91\Client $client
-     * @param int|string|\Craftsys\Msg91\Options|\Craftsys\Msg91\Msg91Message $payload
-     * @return void
-     */
-    public function __construct(Client $client, $payload = null)
+    public function getOptions(): Options
     {
-        $this->client = $client;
-        $this->options = $this->client->getConfig()->getOptions();
-        $this->updateOptionsWithPayload($payload);
+        return $this->options;
     }
 
     /**
@@ -49,7 +36,7 @@ abstract class Service
      */
     protected function updateOptionsWithPayload($payload = null)
     {
-        $this->options->mergeWith($payload);
+        $this->getOptions()->mergeWith($payload);
     }
 
     /**
@@ -59,10 +46,9 @@ abstract class Service
      */
     public function to($mobile = null)
     {
-        $this->options->to($mobile);
+        $this->getOptions()->to($mobile);
         return $this;
     }
-
 
     /**
      * Set the content of message
@@ -71,7 +57,7 @@ abstract class Service
      */
     public function message($message = '')
     {
-        $this->options->message($message);
+        $this->getOptions()->message($message);
         return $this;
     }
 
@@ -82,7 +68,7 @@ abstract class Service
      */
     public function options($options = null)
     {
-        $this->options->mergeWith($options);
+        $this->getOptions()->mergeWith($options);
         return $this;
     }
 
@@ -93,6 +79,6 @@ abstract class Service
      */
     protected function sendRequest(string $request)
     {
-        return (new $request($this->getHttpClient(), $this->options))->handle();
+        return (new $request($this->getHttpClient(), $this->getOptions()))->handle();
     }
 }
