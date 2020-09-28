@@ -33,7 +33,7 @@ abstract class Options
         return $this;
     }
 
-    abstract public function to($mobile = null): self;
+    abstract public function to($mobile = null);
 
     /**
      * Set the sender of the message

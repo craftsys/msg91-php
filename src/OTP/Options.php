@@ -23,7 +23,7 @@ class Options extends Msg91Options
      * @param int|null $mobile - receipient's mobile number
      * @return $this
      */
-    public function to($mobile = null): self
+    public function to($mobile = null)
     {
         $this->mobile($mobile);
         return $this;

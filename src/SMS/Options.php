@@ -12,7 +12,7 @@ class Options extends Msg91Options
      * @param int|array|null $mobile - receipient's mobile number
      * @return $this
      */
-    public function to($mobile = null): self
+    public function to($mobile = null)
     {
         if (is_array($mobile)) {
             if (count($mobile) > 0 && is_array($mobile[0])) {
