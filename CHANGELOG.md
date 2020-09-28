@@ -1,3 +1,10 @@
+# [0.10.0](https://github.com/craftsys/msg91-php/compare/v0.9.0...v0.10.0) (2020-09-28)
+
+
+### Features
+
+* **sms:** use new flow for sending sms ([efff817](https://github.com/craftsys/msg91-php/commit/efff817074f586a6da1305c689d442e1b17d7653))
+
 # [0.9.0](https://github.com/craftsys/msg91-php/compare/v0.8.1...v0.9.0) (2020-09-18)
 
 
