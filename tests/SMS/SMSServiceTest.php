@@ -15,7 +15,7 @@ use GuzzleHttp\Middleware;
 class SMSServiceTest extends TestCase
 {
     protected $config =  [
-        "key" => "123456789012345678901234"
+        "key" => "123123123123"
     ];
 
     protected $container = [];
