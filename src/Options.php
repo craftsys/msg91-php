@@ -134,10 +134,22 @@ abstract class Options implements ContractsOptions
         return $this->payload;
     }
 
+    /**
+     * Get payload for a given key
+     */
+    public function getPayloadForKey(string $key, $default = null)
+    {
+        $payload = $this->getPayload();
+        if (isset($payload[$key])) {
+            return $payload[$key];
+        }
+        return $default;
+    }
+
 
     /**
      * Get the options's array
-     * @return array
+     * @return arra
      */
     public function toArray(): array
     {

@@ -18,7 +18,6 @@ interface Options
      */
     public function to($mobile = null);
 
-
     /**
      * Set the message content
      * @param string|null $message

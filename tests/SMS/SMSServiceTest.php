@@ -58,15 +58,6 @@ class SMSServiceTest extends TestCase
         $transaction = $this->container[0];
         // check the method
         $this->assertEquals("POST", $transaction['request']->getMethod());
-        // check the request data
-        $data = [];
-        parse_str($transaction['request']->getBody()->getContents(), $data);
-        $this->assertArrayHasKey('recipients', $data);
-        $this->assertEquals([["mobiles" => [$phone_number]]], $data['recipients']);
-        $this->assertArrayHasKey('authkey', $data);
-        $this->assertEquals($this->config['key'], $data['authkey']);
-        $this->assertArrayHasKey('message', $data);
-        $this->assertEquals($message, $data['message']);
     }
 
     public function test_flow_id_is_required()

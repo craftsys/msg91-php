@@ -18,6 +18,8 @@ This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg9
         -   [Verify OTP](#verify-otp)
         -   [Resend OTP](#resend-otp)
     -   [Sending SMS](#sending-sms)
+        -   [Flow Variables](#flow-variables)
+        -   [Receiver Key](#receiver-key)
     -   [Handling Responses](#handling-responses)
 -   [Related](#related)
 -   [Acknowledgements](#acknowledgements)
@@ -201,12 +203,64 @@ option.
 ```php
 $client->sms()
     ->to(919999999999)
+    ->flow('flow_id_here') // set the flow id
     ->options(function ($options) {
         $options->transactional() // set that it is a transactional message
             ->from('CMPNY') // set the sender
             ->unicode(); // handle unicode as the message contains unicode characters
     })
     ->message("I ❤️ this package. Thanks.")
+    ->send();
+```
+
+### Flow Variables
+
+To send SMS, you create **Flow** where you can provide a template for your
+SMS. This template may contain some variables which you use as placeholder
+for per message data. You can use `recipients` method to set the values for
+these variables per recipient while sending SMS as follows.
+
+Let's assume that you have create a Flow with following message template
+
+```
+Hi ##name##, Your reward credits will expire on ##date##.
+Claim them to get exclusive benefits
+```
+
+We will to update the `name` and `date` variables per recipient.
+
+```php
+$client->sms()
+    ->flow('flow_id_here') // set the flow id
+    ->recipients([
+        ['mobiles' => '919999999999', 'name' => 'Sudhir M', 'date' => '20 Jan, 2022'],
+        ['mobiles' => '919898912312', 'name' => 'Craft Sys', 'date' => '25 Jan, 2022']
+    ])
+    ->options(function ($options) {
+        $options->receiverKey('mobiles'); // set your receiver key
+    })
+    ->send();
+```
+
+The `mobiles` key in the recipients array comes from the **receiver** field's value
+which we set when creating a new Flow. It defaults to `mobiles`. If you have provided
+a different receiver key, please update the recipients key accordingly.
+
+### Receiver Key
+
+When creating a _Flow_ on MSG91, you can create a custom receiver key which default to `##mobiles##`. This default is
+being used in this package as well. If you have configured your flow with a different receiver key, you can set it
+via `receiverKey` method as follows:
+
+Assuming you have set the receiver field to `##contact##`,
+
+```php
+$client->sms()
+    ->to(919999999999)
+    ->flow('flow_id_here') // set the flow id
+    ->options(function ($options) {
+        $options->receiverKey('contact'); // your receiver key
+    })
     ->send();
 ```
 

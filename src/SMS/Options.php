@@ -8,8 +8,15 @@ use Craftsys\Msg91\Options as Msg91Options;
 class Options extends Msg91Options
 {
     /**
-     * Set the receipient(s) of the sms
-     * @param int|array|null $mobile - receipient's mobile number
+     * Receiver for SMS Flow templates
+     * Configurable when create/editing flow on Msg91 panel
+     * @var string
+     */
+    public $receiver_key = "mobiles";
+
+    /**
+     * Set the recipient(s) of the sms
+     * @param int|array|null $mobile - recipient's mobile number
      * @return $this
      */
     public function to($mobile = null)
@@ -23,12 +30,14 @@ class Options extends Msg91Options
     {
         if (!$mobile) return [];
         if (!is_array($mobile)) {
-            return [[
-                'mobiles' => [$mobile]
-            ]];
+            return [
+                ["{$this->receiver_key}" => $mobile]
+            ];
         }
         return array_map(function ($mobile) {
-            return ['mobiles' => [$mobile]];
+            return [
+                "{$this->receiver_key}" => $mobile
+            ];
         }, $mobile);
     }
 
@@ -39,6 +48,35 @@ class Options extends Msg91Options
     public function flow($flow_id)
     {
         $this->setPayloadFor('flow_id', $flow_id);
+        return $this;
+    }
+
+    /**
+     * Set the flow id for sms
+     * You can get/create your flow id from MSG91 Panel
+     */
+    public function receiverKey(string $receiver_key = "mobiles")
+    {
+        // remove any "#" included in key (by mistake)
+        $receiver_key = str_replace('#', '', $receiver_key);
+        // update the existing recipients
+        $existing_recipients = $this->getPayloadForKey('recipients', []);
+        if ($existing_recipients && count($existing_recipients) > 0) {
+            $recipients = array_map(function ($recipient) use ($receiver_key) {
+                if (isset($recipient[$this->receiver_key])) {
+                    $recipient = array_merge(
+                        [
+                            "{$receiver_key}" => $recipient[$this->receiver_key]
+                        ],
+                        // remove the "$this->receiver_key" from the recipient
+                        array_diff_key($recipient, ["{$this->receiver_key}" => 0])
+                    );
+                }
+                return $recipient;
+            }, $existing_recipients);
+            $this->recipients($recipients);
+        }
+        $this->receiver_key = $receiver_key;
         return $this;
     }
 
