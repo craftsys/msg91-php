@@ -16,7 +16,7 @@ class SMSService extends Service
     /**
      * Create a new service instance
      * @param \Craftsys\Msg91\Client $client
-     * @param int|string|\Craftsys\Msg91\SMS\Options|\Craftsys\Msg91\Msg91Message $payload
+     * @param int|string|\Craftsys\Msg91\Contracts\Options $payload
      * @return void
      */
     public function __construct(Client $client, $payload = null)

@@ -4,8 +4,9 @@ namespace Craftsys\Msg91;
 
 use Closure;
 use Craftsys\Msg91\Contracts\Options as ContractsOptions;
+use JsonSerializable;
 
-abstract class Options implements ContractsOptions
+abstract class Options implements ContractsOptions, JsonSerializable
 {
     /**
      * Payload for the message
@@ -181,7 +182,6 @@ abstract class Options implements ContractsOptions
         $current_payload = $this->getPayload();
         switch (true) {
             case $options instanceof self:
-            case $options instanceof Msg91Message:
                 $this->payload = array_merge($current_payload, $options->getPayload());
                 break;
             case is_array($options):
@@ -206,5 +206,14 @@ abstract class Options implements ContractsOptions
     public function resolveConfig(Config $config)
     {
         $this->mergeWith($config->all());
+    }
+
+    /**
+     * Convert options to json
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }
