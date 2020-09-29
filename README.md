@@ -18,7 +18,7 @@ This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg9
         -   [Verify OTP](#verify-otp)
         -   [Resend OTP](#resend-otp)
     -   [Sending SMS](#sending-sms)
-        -   [Flow Variables](#flow-variables)
+        -   [Message Variables](#message-variables)
         -   [Receiver Key](#receiver-key)
     -   [Handling Responses](#handling-responses)
 -   [Related](#related)
@@ -213,7 +213,7 @@ $client->sms()
     ->send();
 ```
 
-### Flow Variables
+### Message Variables
 
 To send SMS, you create **Flow** where you can provide a template for your
 SMS. This template may contain some variables which you use as placeholder
@@ -244,7 +244,31 @@ $client->sms()
 
 The `mobiles` key in the recipients array comes from the **receiver** field's value
 which we set when creating a new Flow. It defaults to `mobiles`. If you have provided
-a different receiver key, please update the recipients key accordingly.
+a different receiver key, please update the [recipients key](#receiver-key) accordingly.
+
+If you want to put same value for a variable for all recipients, you can use
+`variable` method as follows
+
+```php
+$client->sms()
+    ->flow('flow_id_here') // set the flow id
+    ->to([919898912312, 912343434312]) // you can pass an array of mobile numbers
+    ->variable('overdue', 'Yes') // set the "overdue" variable's value to "Yes"
+    ->variable('url', 'https://domain.com') // set the "url" variable's value to "https://domain.com"
+    ->send();
+
+// you can also combine this with existing variables if you want e.g.
+$client->sms()
+    ->flow('flow_id_here') // set the flow id
+    ->recipients([
+        ['mobiles' => '919999999999', 'name' => 'Sudhir M', 'date' => '20 Jan, 2022'],
+        ['mobiles' => '919898912312', 'name' => 'Craft Sys', 'date' => '25 Jan, 2022']
+    ])
+    ->variable('overdue', 'Yes') // will set the "overdue" for all recipients
+    ->send();
+```
+
+**Note**: You should call the `variable` method only after you have set the recipients.
 
 ### Receiver Key
 

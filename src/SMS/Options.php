@@ -81,6 +81,28 @@ class Options extends Msg91Options
     }
 
     /**
+     * Set value for a variable (used in the Flow message template) for all recipients
+     * NOTE: Please call this method after recipients have been set
+     * @param string $name - name of the variable in the template
+     * @param string|number|null $value - value for the variable to be placed in template
+     * @return $this
+     */
+    public function variable(string $name, $value = null)
+    {
+        // update the existing recipients
+        $existing_recipients = $this->getPayloadForKey('recipients', []);
+        if ($existing_recipients && count($existing_recipients) > 0) {
+            $recipients = array_map(function ($recipient) use ($name, $value) {
+                return array_merge($recipient, [
+                    $name => $value
+                ]);
+            }, $existing_recipients);
+            $this->recipients($recipients);
+        }
+        return $this;
+    }
+
+    /**
      * Set recipients with mobile numbers and any variables to pass to the template
      */
     public function recipients($recipients = [])

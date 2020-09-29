@@ -79,4 +79,16 @@ class SMSService extends Service
         $this->options->content($message);
         return $this;
     }
+
+    /**
+     * Set a variable's value for all the recipients
+     * @param string $name - name of the variable in the template
+     * @param string|number|null $value - value for the variable to be placed in template
+     * @return $this
+     */
+    public function variable(string $name, $value = null): self
+    {
+        $this->options->variable($name, $value);
+        return $this;
+    }
 }
