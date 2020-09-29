@@ -308,7 +308,7 @@ $client->sms()
 
 ## Handling Responses
 
-All the services will return `\Craftsys\Msg91\Response` instance for all successfully responses and will throw
+All the services will return `\Craftsys\Msg91\Support\Response` instance for all successfully responses and will throw
 exceptions if
 
 -   \Craftsys\Msg91\Exceptions\ValidationException: request validation failed

@@ -1,3 +1,10 @@
+# [0.12.0](https://github.com/craftsys/msg91-php/compare/v0.11.2...v0.12.0) (2020-09-29)
+
+
+### Features
+
+* **variables:** add method to set variable for sms ([9f49f6a](https://github.com/craftsys/msg91-php/commit/9f49f6a063b89d140df2d392d2dfcb6d1b132a93))
+
 ## [0.11.2](https://github.com/craftsys/msg91-php/compare/v0.11.1...v0.11.2) (2020-09-29)
 
 
