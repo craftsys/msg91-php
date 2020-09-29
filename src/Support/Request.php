@@ -93,9 +93,10 @@ abstract class Request
         $method = strtolower($this->method);
         try {
             $resp = $client->{$method}($this->url, [
-                "form_params" => $payload,
+                \GuzzleHttp\RequestOptions::JSON => $payload,
                 "headers" => [
-                    'authkey' => $payload['authkey']
+                    'authkey' => $payload['authkey'],
+                    'content-type' => 'application/json'
                 ]
             ]);
             return new Response($resp);

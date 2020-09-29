@@ -48,6 +48,17 @@ abstract class Service
     }
 
     /**
+     * Set the sender
+     * @param int|null $sender_id
+     * @return $this
+     */
+    public function from($sender_id = null)
+    {
+        $this->getOptions()->from($sender_id);
+        return $this;
+    }
+
+    /**
      * Set the content of message
      * @param string|null $message
      * @return $this

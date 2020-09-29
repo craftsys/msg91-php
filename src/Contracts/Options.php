@@ -31,4 +31,11 @@ interface Options
      * @return $this;
      */
     public function mergeWith($options = null);
+
+    /**
+     * Set the sender
+     * @param string|null sender id
+     * @return $this
+     */
+    public function from($sender_id = null);
 }

@@ -49,9 +49,9 @@ class OTPServiceTest extends TestCase
         $phone_number = 919999999999;
         $response = (new Client($this->config, $this->createMockHttpClient()))
             ->otp()
+            ->from("SMSIND")
             ->to($phone_number)
             ->send();
-
         $this->assertInstanceOf(CraftsysResponse::class, $response);
         // make sure there was exacly on request
         $this->assertCount(1, $this->container);
@@ -60,8 +60,7 @@ class OTPServiceTest extends TestCase
         // check the method
         $this->assertEquals("POST", $transaction['request']->getMethod());
         // check the request data
-        $data = [];
-        parse_str($transaction['request']->getBody()->getContents(), $data);
+        $data = (array) json_decode($transaction['request']->getBody()->getContents());
         $this->assertArrayHasKey('mobile', $data);
         $this->assertEquals($phone_number, $data['mobile']);
         $this->assertArrayHasKey('authkey', $data);
@@ -85,8 +84,7 @@ class OTPServiceTest extends TestCase
         // check the method
         $this->assertEquals("POST", $transaction['request']->getMethod());
         // check the request data
-        $data = [];
-        parse_str($transaction['request']->getBody()->getContents(), $data);
+        $data = (array) json_decode($transaction['request']->getBody()->getContents());
         $this->assertArrayHasKey('mobile', $data);
         $this->assertEquals($phone_number, $data['mobile']);
         $this->assertArrayHasKey('authkey', $data);
@@ -111,8 +109,7 @@ class OTPServiceTest extends TestCase
         // check the method
         $this->assertEquals("POST", $transaction['request']->getMethod());
         // check the request data
-        $data = [];
-        parse_str($transaction['request']->getBody()->getContents(), $data);
+        $data = (array) json_decode($transaction['request']->getBody()->getContents());
         $this->assertArrayHasKey('mobile', $data);
         $this->assertEquals($phone_number, $data['mobile']);
         $this->assertArrayHasKey('authkey', $data);

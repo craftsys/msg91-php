@@ -15,7 +15,7 @@ use GuzzleHttp\Middleware;
 class SMSServiceTest extends TestCase
 {
     protected $config =  [
-        "key" => "123123123123"
+        "key" => "12345678901234567890"
     ];
 
     protected $container = [];
@@ -43,13 +43,13 @@ class SMSServiceTest extends TestCase
     public function test_sms_send()
     {
         $phone_number = 919999999999;
-        $message = "My message";
         $response = (new Client($this->config, $this->createMockHttpClient()))
             ->sms()
-            ->message($message)
+            ->from("SENDER_ID")
             ->flow("flow_id_here")
             ->to($phone_number)
             ->send();
+
 
         $this->assertInstanceOf(CraftsysResponse::class, $response);
         // make sure there was exacly on request
