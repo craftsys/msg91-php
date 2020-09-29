@@ -1,3 +1,10 @@
+# [0.13.0](https://github.com/craftsys/msg91-php/compare/v0.12.0...v0.13.0) (2020-09-29)
+
+
+### Features
+
+* **message:** remove the unused message class ([4446f5a](https://github.com/craftsys/msg91-php/commit/4446f5a78c47a19bf7eb12fefda13770fb83a102))
+
 # [0.12.0](https://github.com/craftsys/msg91-php/compare/v0.11.2...v0.12.0) (2020-09-29)
 
 
