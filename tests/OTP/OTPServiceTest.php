@@ -1,18 +1,18 @@
 <?php
 
-namespace Craftsys\Tests\Msg91;
+namespace Craftsys\Tests\Msg91\OTP;
 
 use Craftsys\Msg91\Client;
-use Craftsys\Msg91\Exceptions\ResponseErrorException;
 use Craftsys\Msg91\Exceptions\ValidationException;
-use Craftsys\Msg91\Response as CraftsysResponse;
+use Craftsys\Msg91\Support\Response as CraftsysResponse;
+use Craftsys\Tests\Msg91\TestCase;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Middleware;
 
-class OtpServiceTest extends TestCase
+class OTPServiceTest extends TestCase
 {
     protected $config =  [
         "key" => "12345678901234567890"
@@ -126,22 +126,6 @@ class OtpServiceTest extends TestCase
         $phone_number = 919999999999;
         $this->expectException(ValidationException::class);
         (new Client([], $this->createMockHttpClient()))
-            ->otp()
-            ->to($phone_number)
-            ->send();
-    }
-
-    public function test_response_error_when_invalid_request()
-    {
-        $phone_number = 919999999999;
-        $this->expectException(ResponseErrorException::class);
-        (new Client($this->config, $this->createMockHttpClient(422)))
-            ->otp()
-            ->to($phone_number)
-            ->send();
-
-        $this->expectException(ResponseErrorException::class);
-        (new Client($this->config, $this->createMockHttpClient(200, ['type' => 'error', 'body' => 'Testing the error response with 200 code'])))
             ->otp()
             ->to($phone_number)
             ->send();

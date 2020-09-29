@@ -14,18 +14,22 @@ class Options extends Msg91Options
      */
     public function to($mobile = null)
     {
-        if (is_array($mobile)) {
-            if (count($mobile) > 0 && is_array($mobile[0])) {
-                // add these as recipients
-                $this->recipients($mobile);
-            } else {
-                // add as mobiles
-                $this->mobiles([$mobile]);
-            }
-        } else {
-            $this->mobiles($mobile ? [$mobile] : []);
-        }
+        $recipients = $this->transformMobileNumbersToRecipients($mobile);
+        $this->recipients($recipients);
         return $this;
+    }
+
+    protected function transformMobileNumbersToRecipients($mobile = null): array
+    {
+        if (!$mobile) return [];
+        if (!is_array($mobile)) {
+            return [[
+                'mobiles' => [$mobile]
+            ]];
+        }
+        return array_map(function ($mobile) {
+            return ['mobiles' => [$mobile]];
+        }, $mobile);
     }
 
     /**
@@ -91,10 +95,15 @@ class Options extends Msg91Options
     {
         return (new Options)
             ->key($config->get('key'))
-            ->message($config->get('otp_message'))
-            ->from($config->get('from'))
-            ->route($config->get('route'))
             ->tap(function (Options $msg) use ($config) {
+                // set the sender id
+                if ($config->get('from')) {
+                    $msg->from($config->get('from'));
+                }
+                // set the message route
+                if ($config->get('route')) {
+                    $msg->route($config->get('route'));
+                }
                 // set the unicode if it's set to true
                 if ($config->get('unicode')) {
                     $msg->unicode();

@@ -1,8 +1,8 @@
 <?php
 
-namespace Craftsys\Tests\Msg91\Requests;
+namespace Craftsys\Tests\Msg91;
 
-use Craftsys\Msg91\Requests\URLs;
+use Craftsys\Msg91\URLs;
 use Craftsys\Tests\Msg91\TestCase;
 use GuzzleHttp\Client;
 

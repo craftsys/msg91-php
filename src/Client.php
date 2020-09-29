@@ -2,8 +2,8 @@
 
 namespace Craftsys\Msg91;
 
-use Craftsys\Msg91\OTP\Service as OTPService;
-use Craftsys\Msg91\SMS\Service as SMSService;
+use Craftsys\Msg91\OTP\OTPService;
+use Craftsys\Msg91\SMS\SMSService;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 /**

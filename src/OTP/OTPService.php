@@ -3,9 +3,9 @@
 namespace Craftsys\Msg91\OTP;
 
 use Craftsys\Msg91\Client;
-use Craftsys\Msg91\Service as ServicesService;
+use Craftsys\Msg91\Support\Service;
 
-class Service extends ServicesService
+class OTPService extends Service
 {
     /**
      * Options for Request
@@ -22,16 +22,12 @@ class Service extends ServicesService
     public function __construct(Client $client, $payload = null)
     {
         $this->client = $client;
-        $this->options = (new Options())->resolveConfig($this->client->getConfig());
-        $this->updateOptionsWithPayload($payload);
-    }
-
-    protected function updateOptionsWithPayload($payload = null)
-    {
+        $this->options = (new Options())
+            ->resolveConfig($this->client->getConfig());
         if (is_int($payload)) {
             $this->options->otp($payload);
         } else {
-            parent::updateOptionsWithPayload($payload);
+            $this->options->mergeWith($payload);
         }
     }
 

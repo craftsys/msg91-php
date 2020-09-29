@@ -1,9 +1,11 @@
 <?php
 
-namespace Craftsys\Tests\Msg91;
+namespace Craftsys\Tests\Msg91\SMS;
 
 use Craftsys\Msg91\Client;
-use Craftsys\Msg91\Response as CraftsysResponse;
+use Craftsys\Msg91\Exceptions\ValidationException;
+use Craftsys\Msg91\Support\Response as CraftsysResponse;
+use Craftsys\Tests\Msg91\TestCase;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -13,7 +15,7 @@ use GuzzleHttp\Middleware;
 class SMSServiceTest extends TestCase
 {
     protected $config =  [
-        "key" => "12345678901234567890"
+        "key" => "123456789012345678901234"
     ];
 
     protected $container = [];
@@ -59,11 +61,22 @@ class SMSServiceTest extends TestCase
         // check the request data
         $data = [];
         parse_str($transaction['request']->getBody()->getContents(), $data);
-        $this->assertArrayHasKey('mobiles', $data);
-        $this->assertEquals([$phone_number], $data['mobiles']);
+        $this->assertArrayHasKey('recipients', $data);
+        $this->assertEquals([["mobiles" => [$phone_number]]], $data['recipients']);
         $this->assertArrayHasKey('authkey', $data);
         $this->assertEquals($this->config['key'], $data['authkey']);
         $this->assertArrayHasKey('message', $data);
         $this->assertEquals($message, $data['message']);
+    }
+
+    public function test_flow_id_is_required()
+    {
+        $phone_number = 919999999999;
+        $this->expectException(ValidationException::class);
+        (new Client($this->config, $this->createMockHttpClient()))
+            ->sms()
+            ->message('A message')
+            ->to($phone_number)
+            ->send();
     }
 }

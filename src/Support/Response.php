@@ -1,6 +1,6 @@
 <?php
 
-namespace Craftsys\Msg91;
+namespace Craftsys\Msg91\Support;
 
 use Craftsys\Msg91\Exceptions\ResponseErrorException;
 use GuzzleHttp\Psr7\Response as GuzzleHttpResponse;
@@ -53,13 +53,13 @@ class Response
         $body = (array) json_decode($response->getBody()->getContents());
         if ($body) {
             $this->data = $body;
-            if (isset($body['type'])) {
-                $type = $body['type'];
+            if (isset($body['type']) || isset($body['msg_type'])) {
+                $type = isset($body['type']) ? $body['type'] : $body['msg_type'];
                 if ($type === "error") {
                     $status_code = 422;
                 }
             }
-            $this->message = $body["message"] ?? "No response message";
+            $this->message = isset($body['message']) ? $body["message"] : (isset($body['msg']) ? $body['msg'] : "No response message");
         }
         $this->status_code = $status_code;
         if ((int) $status_code / 100 !== 2) {

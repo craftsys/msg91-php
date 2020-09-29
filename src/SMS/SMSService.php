@@ -3,9 +3,9 @@
 namespace Craftsys\Msg91\SMS;
 
 use Craftsys\Msg91\Client;
-use Craftsys\Msg91\Service as ServicesService;
+use Craftsys\Msg91\Support\Service;
 
-class Service extends ServicesService
+class SMSService extends Service
 {
     /**
      * Options for Request
@@ -22,8 +22,9 @@ class Service extends ServicesService
     public function __construct(Client $client, $payload = null)
     {
         $this->client = $client;
-        $this->options = (new Options())->resolveConfig($this->client->getConfig());
-        $this->updateOptionsWithPayload($payload);
+        $this->options = (new Options())
+            ->resolveConfig($this->client->getConfig())
+            ->mergeWith($payload);
     }
 
     /**
@@ -36,13 +37,24 @@ class Service extends ServicesService
     }
 
     /**
-     * Set the receipients of the message
-     * @param int|null $mobile - receipient's mobile numbers
+     * Set the recipients of the message
+     * @param int|null $mobile - recipients's mobile numbers
      * @return $this
      */
     public function to($mobiles = null)
     {
         $this->options->to($mobiles);
+        return $this;
+    }
+
+    /**
+     * Set the recipients with placeholders
+     * @param array|null $recipients - recipients with mobile number and placeholders
+     * @return $this
+     */
+    public function recipients($recipients = null)
+    {
+        $this->options->recipients($recipients);
         return $this;
     }
 

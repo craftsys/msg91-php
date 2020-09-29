@@ -1,11 +1,10 @@
 <?php
 
-namespace Craftsys\Msg91\Requests;
+namespace Craftsys\Msg91\Support;
 
 use Craftsys\Msg91\Exceptions\ResponseErrorException;
 use Craftsys\Msg91\Exceptions\ValidationException;
-use Craftsys\Msg91\Options;
-use Craftsys\Msg91\Response;
+use Craftsys\Msg91\Contracts\Options;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 abstract class Request
@@ -19,7 +18,7 @@ abstract class Request
     /**
      * Options for the request
      *
-     * @var \Craftsys\Msg91\Options
+     * @var \Craftsys\Msg91\Contracts\Options
      */
     protected $options;
 
@@ -48,7 +47,7 @@ abstract class Request
      * Create a new request instance
      *
      * @param \GuzzleHttp\Client $httpClient
-     * @param \Craftsys\Msg91\Options $options
+     * @param \Craftsys\Msg91\Contracts\Options $options
      * @return void
      */
     public function __construct(GuzzleHttpClient $httpClient, Options $options)
@@ -65,7 +64,7 @@ abstract class Request
      */
     protected function getPayload()
     {
-        return $this->options->getPayload();
+        return $this->options->toArray();
     }
 
     protected function validate(array $payload)
@@ -93,14 +92,13 @@ abstract class Request
         }
         $method = strtolower($this->method);
         try {
-            return new Response(
-                $client->{$method}($this->url, [
-                    "form_params" => $payload,
-                    "headers" => [
-                        'authkey' => $payload['authkey']
-                    ]
-                ])
-            );
+            $resp = $client->{$method}($this->url, [
+                "form_params" => $payload,
+                "headers" => [
+                    'authkey' => $payload['authkey']
+                ]
+            ]);
+            return new Response($resp);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             throw new ResponseErrorException(
                 $e->getMessage(),

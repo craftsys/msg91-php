@@ -2,8 +2,8 @@
 
 namespace Craftsys\Msg91\OTP;
 
-use Craftsys\Msg91\Requests\Request;
-use Craftsys\Msg91\Requests\URLs;
+use Craftsys\Msg91\Support\Request;
+use Craftsys\Msg91\URLs;
 
 class VerifyRequest extends Request
 {

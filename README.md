@@ -189,6 +189,7 @@ To send SMS, access the `SMSService` by calling `->sms()` method on the client i
 $sms = $client->sms();
 
 $sms->to(912343434312) // set the mobile with country code
+    ->flow('flow_id_here') // set the flow id
 	->message("You have 10 pending tasks for the end of the day") // message content
 	->send(); // send the message
 ```

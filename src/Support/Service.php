@@ -1,11 +1,18 @@
 <?php
 
-namespace Craftsys\Msg91;
+namespace Craftsys\Msg91\Support;
 
+use Craftsys\Msg91\Contracts\Options;
 use GuzzleHttp\Client as HttpClient;
 
 abstract class Service
 {
+    /**
+     * Options for Request
+     * @var \Craftsys\Msg91\Contracts\Options
+     */
+    protected $options;
+
     /**
      * The msg91 client instance
      * @var \Craftsys\Msg91\Client
@@ -27,16 +34,6 @@ abstract class Service
     protected function getHttpClient()
     {
         return $this->client->getHttpClient() ?: new HttpClient();
-    }
-
-    /**
-     * Get the initial message
-     * @param int|string|\Craftsys\Msg91\Msg91Message|\Craftsys\Msg91\Options $payload
-     * @return void
-     */
-    protected function updateOptionsWithPayload($payload = null)
-    {
-        $this->getOptions()->mergeWith($payload);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craftsys\Msg91\Requests;
+namespace Craftsys\Msg91\Support;
 
 class Validator
 {

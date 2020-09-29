@@ -3,8 +3,9 @@
 namespace Craftsys\Msg91;
 
 use Closure;
+use Craftsys\Msg91\Contracts\Options as ContractsOptions;
 
-abstract class Options
+abstract class Options implements ContractsOptions
 {
     /**
      * Payload for the message
@@ -33,7 +34,17 @@ abstract class Options
         return $this;
     }
 
-    abstract public function to($mobile = null);
+    /**
+     * Set the receipients
+     * @param string|null $key
+     * @return $this
+     */
+    public function to($mobile = null)
+    {
+        $this->mobile($mobile);
+        $this->mobiles($mobile);
+        return $this;
+    }
 
     /**
      * Set the sender of the message
@@ -128,7 +139,7 @@ abstract class Options
      * Get the options's array
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->payload;
     }
@@ -180,5 +191,8 @@ abstract class Options
     /**
      * Resolve the configuration options
      */
-    public abstract function resolveConfig(Config $config);
+    public function resolveConfig(Config $config)
+    {
+        $this->mergeWith($config->all());
+    }
 }
