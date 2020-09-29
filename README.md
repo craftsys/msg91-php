@@ -11,8 +11,9 @@ This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg9
 -   [Installation](#installation)
 -   [Configuration](#configuration)
 -   [Usage](#usage)
--   [Examples](#examples)
     -   [Create a Client](#create-a-client)
+    -   [OTP and SMS Services](#otp-and-sms-services)
+-   [Examples](#examples)
     -   [Managing OTPs](#managing-otps)
         -   [Send OTP](#send-otp)
         -   [Verify OTP](#verify-otp)
@@ -72,7 +73,7 @@ Once you have [Configured](#configuration), client can be initialised by passing
 
 ```php
 $config = [
-	'key' => "123456789012345678901234",
+  'key' => "123456789012345678901234",
 ];
 $client = new Craftsys\Msg91\Client($config);
 ```
@@ -87,10 +88,6 @@ use Craftsys\Msg91\Client;
 // somewhere in this source file where you need the client
 $client = new Client();
 ```
-
-Next, follow along with [examples](#examples) to learn more
-
-## Examples
 
 ### Create a Client
 
@@ -107,13 +104,34 @@ $client =  new Craftsys\Msg91\Client();
 $client->setConfig($config);
 ```
 
-**NOTE**: Configuration must be set before using any other services on the client.
-
 You can also pass a custom `GuzzleHttp\Client` as the second argument on the Client's constructor.
 
 ```php
 $client = new Craftsys\Msg91\Client($config, new GuzzleHttp\Client());
 ```
+### OTP and SMS Services
+
+After a client has been created, you can access `otp` and `sms` services to send OTPs and SMSs respectivily. 
+
+**NOTE**: Configuration must be set before using any other services on the client.
+
+```php
+// send otp
+$client->otp()->to(919999999999)->send()
+
+// verify a given otp
+$client->otp(<otp_to_be_verified>)->to(919999999999)->verify()
+
+// resend otp via voice channel
+$client->otp()->to(919999999999)->viaVoice()->resend()
+
+// send sms
+$client->sms()->to(919999999999)->flow("<flow_id>")->send();
+```
+
+Next, follow along with [examples](#examples) to learn more
+
+## Examples
 
 ### Managing OTPs
 
@@ -138,12 +156,12 @@ Instead of relying on defaults from the Msg91 or the client, you can pass all th
 
 ```php
 $otp->to(91123123123)
+    ->from("SENDER_ID") // sender id
     ->template("AFH") // template id for otps
     ->options(function (\Craftsys\Msg91\OTP\Options $options) {
         $options->digits(6) // set the number of digits in generated otp
-        ->message("##OTP## is your verification code") // custom template
-        ->from("CMPNY") // sender
-        ->expiresInMinutes(60); // set the expiry
+          ->message("##OTP## is your verification code") // custom template
+          ->expiresInMinutes(60); // set the expiry
     })
 	->send() // finally send
 ```

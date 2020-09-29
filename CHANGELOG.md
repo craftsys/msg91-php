@@ -1,3 +1,10 @@
+## [0.11.2](https://github.com/craftsys/msg91-php/compare/v0.11.1...v0.11.2) (2020-09-29)
+
+
+### Bug Fixes
+
+* **sms:** fix content type for sms sending apis ([95b099b](https://github.com/craftsys/msg91-php/commit/95b099b7643c0a5e4cb657a67c5b69028b8af90e))
+
 ## [0.11.1](https://github.com/craftsys/msg91-php/compare/v0.11.0...v0.11.1) (2020-09-29)
 
 
