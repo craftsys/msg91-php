@@ -1,3 +1,15 @@
+# [0.11.0](https://github.com/craftsys/msg91-php/compare/v0.10.1...v0.11.0) (2020-09-29)
+
+
+### Bug Fixes
+
+* **sms:** fix the sms endpoint and code refactoring ([e8f6323](https://github.com/craftsys/msg91-php/commit/e8f6323ae9d326093ce736da5e4b652e8d6aad67))
+
+
+### Features
+
+* **receiver:** add custom receiver key ([1e4fa8f](https://github.com/craftsys/msg91-php/commit/1e4fa8f3fb8be9fadea644886406e64132b6458c))
+
 ## [0.10.1](https://github.com/craftsys/msg91-php/compare/v0.10.0...v0.10.1) (2020-09-28)
 
 
