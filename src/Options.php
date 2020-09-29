@@ -15,7 +15,7 @@ abstract class Options implements ContractsOptions, JsonSerializable
     protected $payload = [];
 
     /**
-     * Construct a new Msg91Message
+     * Construct a new Options
      * @param mixed $options - initial payload of the message
      * @return void
      */
@@ -181,8 +181,8 @@ abstract class Options implements ContractsOptions, JsonSerializable
         // do which ever results in true
         $current_payload = $this->getPayload();
         switch (true) {
-            case $options instanceof self:
-                $this->payload = array_merge($current_payload, $options->getPayload());
+            case $options instanceof ContractsOptions:
+                $this->payload = array_merge($current_payload, $options->toArray());
                 break;
             case is_array($options):
                 // if it is an array

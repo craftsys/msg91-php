@@ -23,12 +23,8 @@ class OTPService extends Service
     {
         $this->client = $client;
         $this->options = (new Options())
-            ->resolveConfig($this->client->getConfig());
-        if (is_int($payload)) {
-            $this->options->otp($payload);
-        } else {
-            $this->options->mergeWith($payload);
-        }
+            ->resolveConfig($this->client->getConfig())
+            ->mergeWith($payload);
     }
 
     /**

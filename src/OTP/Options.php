@@ -8,6 +8,19 @@ use Craftsys\Msg91\Options as Msg91Options;
 class Options extends Msg91Options
 {
     /**
+     * Construct a new options
+     * @param mixed $options - initial payload of the message
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        if (is_int($options)) {
+            $this->otp($options);
+        } else {
+            $this->mergeWith($options);
+        }
+    }
+    /**
      * Set the otp for the message
      * @param int|null $otp
      * @return $this
@@ -71,6 +84,16 @@ class Options extends Msg91Options
     public function method($via = null)
     {
         $this->setPayloadFor('retrytype', $via);
+        return $this;
+    }
+
+    public function mergeWith($options = null)
+    {
+        if (is_int($options)) {
+            $this->otp($options);
+        } else {
+            parent::mergeWith($options);
+        }
         return $this;
     }
 
