@@ -71,4 +71,60 @@ class OptionsTest extends TestCase
             $this->assertEquals('Craft Sys', $recipient['name']);
         }
     }
+
+
+    public function test_merge_will_merge_recipients()
+    {
+        $this->options = $this->options
+            ->recipients([[
+                'mobiles' => '91123123123'
+            ]])->mergeWith((new Options)->recipients([[
+                'mobiles' => '91123123124'
+            ]]));
+        $recipients = $this->options->getPayloadForKey('recipients');
+        $this->assertCount(2, $recipients);
+    }
+
+    public function test_merging_with_another_options_keeps_variables()
+    {
+        $this->options = $this->options
+            ->recipients([[
+                'mobiles' => '91123123123'
+            ]])
+            ->variable('name', 'Craft Sys')
+            ->mergeWith((new Options())
+                ->recipients([
+                    [
+                        'mobiles' => '91123123124'
+                    ]
+                ])
+                ->variable('short_name', 'Craft'));
+        $recipients = $this->options->getPayloadForKey('recipients');
+        $this->assertCount(2, $recipients);
+        foreach ($recipients as $recipient) {
+            $this->assertArrayHasKey('name', $recipient);
+            $this->assertArrayHasKey('short_name', $recipient);
+            $this->assertEquals('Craft Sys', $recipient['name']);
+            $this->assertEquals('Craft', $recipient['short_name']);
+        }
+    }
+
+    public function test_variable_applied_to_future_recipients()
+    {
+        $this->options = $this->options
+            ->variable('short_name', 'Craft')
+            ->recipients([[
+                'mobiles' => '91123123123'
+            ], [
+                'mobiles' => '91123123124'
+            ]])
+            ->variable('name', 'Craft Sys');
+        $recipients = $this->options->getPayloadForKey('recipients');
+        foreach ($recipients as $recipient) {
+            $this->assertArrayHasKey('name', $recipient);
+            $this->assertArrayHasKey('short_name', $recipient);
+            $this->assertEquals('Craft Sys', $recipient['name']);
+            $this->assertEquals('Craft', $recipient['short_name']);
+        }
+    }
 }
