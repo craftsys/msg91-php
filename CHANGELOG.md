@@ -1,3 +1,10 @@
+## [0.14.1](https://github.com/craftsys/msg91-php/compare/v0.14.0...v0.14.1) (2020-09-30)
+
+
+### Bug Fixes
+
+* **variables:** merging sms options with variables not working ([c96f2e0](https://github.com/craftsys/msg91-php/commit/c96f2e04f6644befd368b63df7699286ab3e0151))
+
 # [0.14.0](https://github.com/craftsys/msg91-php/compare/v0.13.0...v0.14.0) (2020-09-29)
 
 
