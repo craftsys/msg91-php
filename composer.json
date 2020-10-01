@@ -1,6 +1,6 @@
 {
     "name": "craftsys/msg91-php",
-    "description": "PHP Client for using Msg91's API.",
+    "description": "PHP Client for using Msg91's API to Send OTPs, Verify OTPs, Resend OTPs, Send SMS (Short Message) etc.",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -13,7 +13,12 @@
     ],
     "keywords": [
         "msg91",
-        "php"
+        "php",
+        "otp",
+        "sms",
+        "verify otp",
+        "resend otp",
+        "short message"
     ],
     "homepage": "https://github.com/craftsys/msg91-php",
     "support": {
