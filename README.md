@@ -1,5 +1,12 @@
 # PHP Client Library for Msg91
 
+<p>
+<a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/dt/craftsys/msg91-php" alt="Total Downloads" /></a>
+<a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/v/craftsys/msg91-php" alt="Latest Stable Version" /></a>
+<a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/l/craftsys/msg91-php" alt="License" /></a>
+<a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/github/workflow/status/craftsys/msg91-php/tests" alt="Status" /></a>
+</p>
+
 _This library requires a minimum PHP version of 7.1_
 
 This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139). Before using it, please make sure you have an account on [Msg91](https://msg91.com/) and have an **Authkey** (Msg91 Dashboard > API > Configure).
