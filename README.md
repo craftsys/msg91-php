@@ -1,4 +1,4 @@
-# PHP Client Library for Msg91
+# Msg91 REST API client for PHP
 
 <p>
 <a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/dt/craftsys/msg91-php" alt="Total Downloads" /></a>
