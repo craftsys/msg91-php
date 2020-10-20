@@ -1,3 +1,10 @@
+## [0.14.2](https://github.com/craftsys/msg91-php/compare/v0.14.1...v0.14.2) (2020-10-20)
+
+
+### Bug Fixes
+
+* **verify-otp:** content type for otp is not correct ([b767e3a](https://github.com/craftsys/msg91-php/commit/b767e3abeaa2ef231175ada2b34f0c1b353803c2))
+
 ## [0.14.1](https://github.com/craftsys/msg91-php/compare/v0.14.0...v0.14.1) (2020-09-30)
 
 
