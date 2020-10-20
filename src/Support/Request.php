@@ -6,6 +6,7 @@ use Craftsys\Msg91\Exceptions\ResponseErrorException;
 use Craftsys\Msg91\Exceptions\ValidationException;
 use Craftsys\Msg91\Contracts\Options;
 use GuzzleHttp\Client as GuzzleHttpClient;
+use GuzzleHttp\RequestOptions;
 
 abstract class Request
 {
@@ -37,11 +38,17 @@ abstract class Request
     protected $url = "";
 
     /**
+     * Content type
+     */
+    protected $content_type = RequestOptions::JSON;
+
+    /**
      * Validation instance
      *
      * @var \Craftsys\Msg91\Requests\Validator
      */
     protected $validator;
+
 
     /**
      * Create a new request instance
@@ -93,10 +100,9 @@ abstract class Request
         $method = strtolower($this->method);
         try {
             $resp = $client->{$method}($this->url, [
-                \GuzzleHttp\RequestOptions::JSON => $payload,
+                $this->content_type => $payload,
                 "headers" => [
                     'authkey' => $payload['authkey'],
-                    'content-type' => 'application/json'
                 ]
             ]);
             return new Response($resp);

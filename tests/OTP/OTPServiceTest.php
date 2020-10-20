@@ -84,7 +84,7 @@ class OTPServiceTest extends TestCase
         // check the method
         $this->assertEquals("POST", $transaction['request']->getMethod());
         // check the request data
-        $data = (array) json_decode($transaction['request']->getBody()->getContents());
+        parse_str($transaction['request']->getBody()->getContents(), $data);
         $this->assertArrayHasKey('mobile', $data);
         $this->assertEquals($phone_number, $data['mobile']);
         $this->assertArrayHasKey('authkey', $data);
