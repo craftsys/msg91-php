@@ -2,9 +2,9 @@
 
 <p>
 <a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/dt/craftsys/msg91-php" alt="Total Downloads" /></a>
-<a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/v/craftsys/msg91-php" alt="Latest Stable Version" /></a>
+<a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/v/craftsys/msg91-php?label=version" alt="Latest Stable Version" /></a>
 <a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/l/craftsys/msg91-php" alt="License" /></a>
-<a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/github/workflow/status/craftsys/msg91-php/tests" alt="Status" /></a>
+<a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/github/workflow/status/craftsys/msg91-php/tests?label=tests" alt="Status" /></a>
 </p>
 
 _This library requires a minimum PHP version of 7.1_
