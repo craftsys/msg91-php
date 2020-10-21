@@ -1,5 +1,17 @@
 # Msg91 REST API client for PHP
 
+### Sponsor
+
+<table>
+   <tr>
+       <td><a href="https://sembark.com?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=msg91-php&utm_content=sembark"><img src="https://avatars1.githubusercontent.com/u/66683304?s=50&v=4"></a></td>
+      <td>
+          <b>Sembark Tech.</b><br />
+          Manage and grow your travel business with Sembark's software solutions.
+          Click <a href="https://sembark.com?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=msg91-php&utm_content=sembark">here</a> to learn more.</td>
+   </tr>
+</table>
+
 <p>
 <a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/dt/craftsys/msg91-php" alt="Total Downloads" /></a>
 <a href="https://packagist.org/packages/craftsys/msg91-php"><img src="https://img.shields.io/packagist/v/craftsys/msg91-php?label=version" alt="Latest Stable Version" /></a>
