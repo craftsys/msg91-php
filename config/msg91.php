@@ -41,7 +41,7 @@ return [
 
     /**
     |--------------------------------------------------------------------------
-    | Default sender
+    | Default sender id
     |--------------------------------------------------------------------------
     | This values sets the `sender` option in apis which is used as the "From"
     | in messaging applications.
@@ -60,7 +60,7 @@ return [
 
     /**
     |--------------------------------------------------------------------------
-    | OTP Expiry
+    | OTP Expiry time
     |--------------------------------------------------------------------------
     | Expiry time (in minutes) for which the send OTP is valid. The minimum
     | values is 1 minute. Use integer values only.
@@ -79,7 +79,7 @@ return [
 
     /**
     |--------------------------------------------------------------------------
-    | Route for SMS
+    | Unicode
     |--------------------------------------------------------------------------
     | If all your messages includes unicode, set it's value to 1, else set
     | it when calling the sms apis.
