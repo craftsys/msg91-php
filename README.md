@@ -28,9 +28,9 @@ This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg9
 ## Table of Contents
 
 -   [Installation](#installation)
--   [Configuration](#configuration)
 -   [Usage](#usage)
     -   [Create a Client](#create-a-client)
+    -   [Configuration](#configuration)
     -   [OTP and SMS Services](#otp-and-sms-services)
 -   [Examples](#examples)
     -   [Managing OTPs](#managing-otps)
@@ -52,7 +52,68 @@ The packages is available on [Packagist](https://packagist.org/packages/craftsys
 composer require craftsys/msg91-php
 ```
 
-## Configuration
+## Usage
+
+If you're using Composer, make sure the autoloader is included in your project's bootstrap file:
+
+```php
+require_once "vendor/autoload.php";
+```
+
+Now the client can be initialised by passing a [configured](#configuration) object to the constructor.
+
+```php
+$config = [
+  'key' => "123456789012345678901234",
+];
+$client = new Craftsys\Msg91\Client($config);
+```
+
+The package in distributed under `Craftsys\Msg91` namespace which can used if your are working in a namespace environment.
+
+```php
+<?php
+// in your use statement sections
+use Craftsys\Msg91\Client;
+
+// somewhere in this source file where you need the client
+$client = new Client($config);
+
+// send OTP using the otp service on client
+$client->otp()->to(919999999999)->send();
+
+// verify an OTP (1234)
+$client->otp(1234)->to(919999999999)->verify();
+
+// send SMS using the sms service on client
+$client->sms()->to(919999999999)->flow("<flow_id>")->send();
+```
+Continue reading to learn more about configuration and available method on `opt` and `sms` services with examples.
+
+
+### Create a Client
+
+The client is responsible for interacting with Msg91 apis.
+
+```php
+$client =  new Craftsys\Msg91\Client($config);
+```
+
+Client can also be initialised without a configuration which can be set by calling `setConfig($config)` method on the client instance.
+
+```php
+$client =  new Craftsys\Msg91\Client();
+$client->setConfig($config);
+```
+
+You can also pass a custom `GuzzleHttp\Client` as the second argument on the Client's constructor.
+
+```php
+$client = new Craftsys\Msg91\Client($config, new GuzzleHttp\Client());
+```
+
+
+### Configuration
 
 The module is configurable to your specific needs where you need to set default options for APIs like the default OTP message format, retry method etc.
 
@@ -80,54 +141,8 @@ Following configuration options are available:
 
 **NOTE**: Setting any if these values as null will override the default values to null too. And so, the default values from Msg91 APIs will be used. For example, setting the `otp_message` to `null` will let use "Your verification code is ##OTP##" which the default from [APIS](https://docs.msg91.com/collection/msg91-api-integration/5/send-otp-message/TZ6HN0YI)
 
-## Usage
 
-If you're using Composer, make sure the autoloader is included in your project's bootstrap file:
 
-```php
-require_once "vendor/autoload.php";
-```
-
-Once you have [Configured](#configuration), client can be initialised by passing a configuration object to the constructor. The configuration in the constructor is optional.
-
-```php
-$config = [
-  'key' => "123456789012345678901234",
-];
-$client = new Craftsys\Msg91\Client($config);
-```
-
-The package in distributed under `Craftsys\Msg91` namespace which can used if your are working in a namespace environment.
-
-```php
-<?php
-// in your use statement sections
-use Craftsys\Msg91\Client;
-
-// somewhere in this source file where you need the client
-$client = new Client();
-```
-
-### Create a Client
-
-The client is responsible for interacting with Msg91 apis.
-
-```php
-$client =  new Craftsys\Msg91\Client($config);
-```
-
-Client can also be initialised without a configuration which can be set by calling `setConfig($config)` method on the client instance.
-
-```php
-$client =  new Craftsys\Msg91\Client();
-$client->setConfig($config);
-```
-
-You can also pass a custom `GuzzleHttp\Client` as the second argument on the Client's constructor.
-
-```php
-$client = new Craftsys\Msg91\Client($config, new GuzzleHttp\Client());
-```
 ### OTP and SMS Services
 
 After a client has been created, you can access `otp` and `sms` services to send OTPs and SMSs respectivily. 
