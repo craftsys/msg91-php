@@ -1,3 +1,10 @@
+# [0.15.0](https://github.com/craftsys/msg91-php/compare/v0.14.2...v0.15.0) (2020-11-11)
+
+
+### Features
+
+* **deps:** add php8 support ([#5](https://github.com/craftsys/msg91-php/issues/5)) ([311b30f](https://github.com/craftsys/msg91-php/commit/311b30ffb77c1c402d1e82054c5590641314ef90))
+
 ## [0.14.2](https://github.com/craftsys/msg91-php/compare/v0.14.1...v0.14.2) (2020-10-20)
 
 
