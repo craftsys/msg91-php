@@ -1,3 +1,10 @@
+## [0.15.1](https://github.com/craftsys/msg91-php/compare/v0.15.0...v0.15.1) (2021-03-23)
+
+
+### Bug Fixes
+
+* **otp-resend:** otp resend requires content type to be form data ([#7](https://github.com/craftsys/msg91-php/issues/7)) ([bbffa00](https://github.com/craftsys/msg91-php/commit/bbffa00299d9761b4a5ffdeaeeda0ba4cc660798))
+
 # [0.15.0](https://github.com/craftsys/msg91-php/compare/v0.14.2...v0.15.0) (2020-11-11)
 
 
