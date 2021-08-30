@@ -1,3 +1,10 @@
+## [0.15.2](https://github.com/craftsys/msg91-php/compare/v0.15.1...v0.15.2) (2021-08-30)
+
+
+### Bug Fixes
+
+* **php8:** required params should be first ([#8](https://github.com/craftsys/msg91-php/issues/8)) ([1c75ad7](https://github.com/craftsys/msg91-php/commit/1c75ad7fdde1ac6f42a7a8fd16f570dd31d66d43))
+
 ## [0.15.1](https://github.com/craftsys/msg91-php/compare/v0.15.0...v0.15.1) (2021-03-23)
 
 
