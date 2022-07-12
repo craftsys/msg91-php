@@ -78,6 +78,16 @@ class OTPService extends Service
     }
 
     /**
+     * Set the otp length for OTPs
+     * @return $this
+     */
+    public function digits($otp_length = 4)
+    {
+        $this->options->digits($otp_length);
+        return $this;
+    }
+
+    /**
      * Send otp
      * @return \Craftsys\Msg91\Response
      */
