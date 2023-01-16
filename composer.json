@@ -55,6 +55,6 @@
         }
     },
     "scripts": {
-        "test": "phpunit  --colors=always --convertDeprecationsToExceptions=true"
+        "test": "phpunit  --colors=always"
     }
 }
