@@ -1,3 +1,10 @@
+## [0.15.3](https://github.com/craftsys/msg91-php/compare/v0.15.2...v0.15.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* **php-8.1:** Ensure JsonSerializable implementation follows interface ([40ee752](https://github.com/craftsys/msg91-php/commit/40ee752040bae0878b9d3c43dbae2dba54a46c88))
+
 ## [0.15.2](https://github.com/craftsys/msg91-php/compare/v0.15.1...v0.15.2) (2021-08-30)
 
 
