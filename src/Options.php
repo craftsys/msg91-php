@@ -212,7 +212,7 @@ abstract class Options implements ContractsOptions, JsonSerializable
      * Convert options to json
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->toArray();
     }

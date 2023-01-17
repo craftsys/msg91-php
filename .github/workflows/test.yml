@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [7.1, 7.2, 7.3, 7.4, 8.0]
+        php: [7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2]
 
     name: P${{ matrix.php }}
 
@@ -32,9 +32,10 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          ini-values: error_reporting=E_ALL
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-interaction --no-suggest
+        run: composer install --prefer-dist --no-interaction
 
       - name: Execute tests
         run: composer run-script test

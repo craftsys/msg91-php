@@ -17,7 +17,7 @@ class Response
      * Status of the
      * @var int
      */
-    protected $status = 422;
+    protected $status_code = 422;
 
     /**
      * Response data
