@@ -23,8 +23,6 @@ _This library requires a minimum PHP version of 7.1_
 
 This is a **PHP Client** for [Msg91 APIs](https://docs.msg91.com/collection/msg91-api-integration/5/pages/139). Before using it, please make sure you have an account on [Msg91](https://msg91.com/) and have an **Authkey** (Msg91 Dashboard > API > Configure).
 
-> **NOTE**: The project is under active development and so, some apis are subjected to change before of `v1.0.0` release.
-
 ## Table of Contents
 
 -   [Installation](#installation)
