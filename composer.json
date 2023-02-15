@@ -55,6 +55,6 @@
         }
     },
     "scripts": {
-        "test": "phpunit  --colors=always --display-deprecations --display-notices --display-warnings"
+        "test": "phpunit  --colors=always"
     }
 }
