@@ -1,3 +1,10 @@
+## [0.15.4](https://github.com/craftsys/msg91-php/compare/v0.15.3...v0.15.4) (2023-01-17)
+
+
+### Added support for `php-8.2+`
+
+* **php-8.2:** Linked the config files which supports `php8.2` ([431426d](https://github.com/craftsys/msg91-php/commit/431426d0af8379f37ca3a7ef982054aa30bcfc51))
+
 ## [0.15.3](https://github.com/craftsys/msg91-php/compare/v0.15.2...v0.15.3) (2023-01-17)
 
 

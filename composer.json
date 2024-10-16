@@ -27,7 +27,7 @@
         "email": "luckysud4@gmail.com"
     },
     "require": {
-        "php": ">=7.1|^8.0|^8.1",
+        "php": ">=7.1|^8.0|^8.1|^8.2",
         "guzzlehttp/guzzle": "^6.5.5|^7.0.1"
     },
     "require-dev": {
