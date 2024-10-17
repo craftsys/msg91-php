@@ -16,7 +16,7 @@ class Config
      */
     public function __construct(array $items = null, string $base_config_path = null)
     {
-        $this->items = require($base_config_path ?: __DIR__ . "./../config/msg91.php");
+        $this->items = require($base_config_path ?: __DIR__ . DIRECTORY_SEPARATOR . join(DIRECTORY_SEPARATOR, array('..', 'config', 'msg91.php')));
         $this->mergeWith($items);
     }
 
