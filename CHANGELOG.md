@@ -1,3 +1,10 @@
+## [0.15.4](https://github.com/craftsys/msg91-php/compare/v0.15.3...v0.15.4) (2024-10-17)
+
+
+### Bug Fixes
+
+* **php-8.2:** improve the default config path for other os ([f46d3eb](https://github.com/craftsys/msg91-php/commit/f46d3ebd27fc29994cd5eed492171b8ab2c05a15))
+
 ## [0.15.3](https://github.com/craftsys/msg91-php/compare/v0.15.2...v0.15.3) (2023-01-17)
 
 
