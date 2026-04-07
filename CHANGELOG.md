@@ -1,3 +1,10 @@
+## [0.15.5](https://github.com/craftsys/msg91-php/compare/v0.15.4...v0.15.5) (2026-04-07)
+
+
+### Bug Fixes
+
+* **php83:** add support for php8.3 ([#16](https://github.com/craftsys/msg91-php/issues/16)) ([fabb42b](https://github.com/craftsys/msg91-php/commit/fabb42b285227aa1c4a2a506ef8d9422333f8715))
+
 ## [0.15.4](https://github.com/craftsys/msg91-php/compare/v0.15.3...v0.15.4) (2024-10-17)
 
 
